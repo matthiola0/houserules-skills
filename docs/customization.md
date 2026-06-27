@@ -22,7 +22,9 @@ the CEO reads it automatically every time, so you never re-explain it verbally.
 
 ### Change code / commit style
 Edit `.ai-team/style.md` and `.ai-team/commit.md` directly. The Coder / Reviewer follow it
-next time automatically.
+next time automatically. For complete filled-in references, see
+[`examples/`](../examples/) (a TypeScript/React code project) and this repo's own
+`.ai-team/` (a writing project).
 
 ### Toggle roles
 Edit "Enabled roles" in `.ai-team/config.md`. For example, a pure-research project can turn

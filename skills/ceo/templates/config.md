@@ -2,6 +2,7 @@
 
 > The CEO generates this during init from your answers. It is read first every time.
 > Edit it any time. `<...>` marks a field to fill in.
+> A complete filled example: `examples/typescript-web/.ai-team/config.md`.
 
 ## Project
 - Name: <project name>

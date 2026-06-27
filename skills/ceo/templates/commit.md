@@ -2,6 +2,7 @@
 
 > The Coder follows this on every commit. Defaults to a clean, no-AI-attribution style
 > that matches most people's habits.
+> A complete filled example: `examples/typescript-web/.ai-team/commit.md`.
 
 ## Hard rules (never violate)
 - **Never** add `Co-Authored-By` or any AI / Claude / Codex attribution or tool signature.

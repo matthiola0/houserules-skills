@@ -122,6 +122,9 @@ the same rules across machines or a team, un-ignore and commit it — see
 | `.ai-team/commit.md` | Commit message style |
 | `.ai-team/ceo-brain.md` | CEO's thinking framework (swappable) |
 
+See complete filled-in examples in [`examples/`](examples/) (a TypeScript/React code
+project, and this repo's own `.ai-team/` for a writing project).
+
 ## Swapping the CEO brain (nuwa)
 
 By default the CEO uses a Musk first-principles framework. To use someone else's, distill

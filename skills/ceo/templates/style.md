@@ -2,6 +2,7 @@
 
 > The source of truth when the Coder writes and the Reviewer audits. Filled during init
 > from your answers; editable any time.
+> A complete filled example: `examples/typescript-web/.ai-team/style.md`.
 > Top principle: **new code should read like the existing code in the project** — the
 > below are defaults for when the existing convention is unclear.
 
