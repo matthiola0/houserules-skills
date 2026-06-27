@@ -30,7 +30,8 @@ Have Codex read the PRD + SDD and find architecture-level issues (the most expen
 to get wrong):
 
 ```bash
-codex exec -s read-only -o .ai-team/reviews/codex-design-raw.txt \
+# NNN = the next review number; keeps each raw dump distinct (don't overwrite)
+codex exec -s read-only -o .ai-team/reviews/NNN-sdd-raw.txt \
   "Read .ai-team/prd.md and .ai-team/sdd.md. Perform a DESIGN review. Check:
    (1) does the design satisfy the PRD? (2) architectural risks, scalability,
    data-model flaws, missing edge cases, security; (3) simpler alternatives.

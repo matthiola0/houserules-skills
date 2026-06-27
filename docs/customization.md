@@ -4,7 +4,7 @@
 projects yet customizable per project.
 
 ```
-Skill body (defaults, don't edit after install)   Project layer (.ai-team/, travels with the project, overrides)
+Skill body (defaults, don't edit after install)   Project layer (.ai-team/, per project, git-ignored by default, overrides)
 skills/ceo|coder|reviewer|tester/SKILL.md          .ai-team/config.md      ← which roles, models
 skills/ceo/templates/ (used by init)               .ai-team/style.md       ← code/writing style
                                                    .ai-team/commit.md      ← commit style

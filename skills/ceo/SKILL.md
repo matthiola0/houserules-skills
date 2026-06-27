@@ -22,12 +22,20 @@ and hold the quality gates.
 2. Read `.ai-team/config.md`, `.ai-team/style.md`, `.ai-team/commit.md` (if present).
 3. **If `.ai-team/config.md` does not exist → run §1 init first**, otherwise go to §2.
 
-**How you dispatch a role**: invoke the corresponding skill (`coder`, `reviewer`,
-`tester`) with the **Skill tool**, pointing it at the relevant `.ai-team/` files. There is
-no separate Drafter/Editor/Fact-checker skill — those are **modes inside** the same three
-skills: non-code work uses `coder` (Drafter mode), `reviewer` (Editor mode), and `tester`
-(Fact-checker mode). If a role skill isn't installed, fall back to doing that role's
-SKILL.md steps inline yourself.
+**How you dispatch a role** — concretely, one of:
+- **(a) Subagent (preferred for isolation)**: use the **Agent tool** to spawn a subagent
+  whose prompt is "act as the <role>: follow `skills/<role>/SKILL.md`" plus the relevant
+  `.ai-team/` file paths. The subagent does the work in its own context and writes its
+  output back to `.ai-team/`.
+- **(b) In-context**: invoke the role skill with the **Skill tool** (or just read
+  `skills/<role>/SKILL.md`) and follow its steps yourself in this conversation.
+- Either way, the role reads/writes the agreed `.ai-team/` files, and the Reviewer
+  ultimately runs `codex` through the shell (a concrete Bash command).
+
+There is no separate Drafter/Editor/Fact-checker skill — those are **modes inside** the
+same three skills: non-code work uses `coder` (Drafter mode), `reviewer` (Editor mode),
+and `tester` (Fact-checker mode). If a role skill isn't installed, do that role's SKILL.md
+steps inline yourself.
 
 ## 1. Init (first time only)
 
