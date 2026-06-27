@@ -40,28 +40,27 @@ steps inline yourself.
 ## 1. Init (first time only)
 
 When `.ai-team/` is missing, generate settings from the templates that ship inside this
-skill (the `templates/` folder next to this SKILL.md, i.e.
-`skills/hr-ceo/templates/`), asking the user **multiple-choice questions** (picking is easier
-than answering from scratch):
+skill (`skills/hr-ceo/templates/`). The templates already contain **sensible recommended
+defaults** (language-agnostic style, Conventional Commits, no AI attribution, Musk brain),
+so always ask **these two quick questions first**:
 - Primary task type? code / writing / research
-- Code style preferences (language, formatting, naming) → `style.md`
-- Comment style (when/how to comment, doc-comments, TODO format) → `style.md`
-- Documentation & prose style (tone, structure, formatting for README/docs/commit
-  bodies) → `style.md`
-- Commit style → default applies Conventional Commits prefix (`feat:`/`fix:`/...),
-  imperative subject, no AI/Co-Authored-By attribution; just confirm → `commit.md`
-- Which roles to enable (Reviewer / Tester on by default) → `config.md`
-- Which CEO brain (defaults to a first-principles framework) → `ceo-brain.md`
-Copy the matching files from this skill's `templates/` into the project's `.ai-team/`,
-then **fill in every `<...>` placeholder** from the answers — leave no `<...>` behind.
-Fields that must be replaced:
-- `config.md`: project name, default task type, enabled roles.
-- `style.md`: language, formatter, linter, naming, formatting, tests, error handling,
-  comment style, doc/prose style.
-- `commit.md`: confirm or change the Conventional Commits toggle.
-- `ceo-brain.md`: keep the default, or replace with another brain.
+- **Use recommended house rules, or customize?** (multiple choice)
 
-Then:
+**If "recommended" (the skip path):** copy the templates as-is, fill only the project name
+and task type in `config.md`, and you're done — no further questions. The style defaults to
+"auto-detect the stack and follow its idioms + formatter."
+
+**If "customize":** ask follow-up **multiple-choice questions** (picking is easier than
+answering from scratch) and fill the specifics into the copied files, leaving no `<...>`
+behind:
+- Code style (language, formatter, naming, formatting, tests, error handling) → `style.md`
+- Comment style (when/how to comment, doc-comments, TODO format) → `style.md`
+- Documentation & prose style (tone, structure, formatting) → `style.md`
+- Commit style — confirm or change the Conventional Commits toggle → `commit.md`
+- Which roles to enable (Reviewer / Tester on by default) → `config.md`
+- Which CEO brain (defaults to Musk first-principles) → `ceo-brain.md`
+
+Then (both paths):
 1. Create the artifact directories `.ai-team/reviews/` and `.ai-team/tests/` (the Reviewer
    and Tester write there).
 2. Add `.ai-team/` to the project's **root** `.gitignore` (create the file if missing; skip
@@ -81,6 +80,10 @@ Read the default from `config.md` and judge the current request:
    Using `ceo-brain.md`'s thinking, talk with the user, ask **multiple-choice
    questions** to clarify needs and surface gaps. Produce `.ai-team/prd.md` (what, why,
    for whom, success criteria, scope boundaries).
+   **Mandatory: do NOT write the PRD from your own assumptions.** Ask the user at least one
+   round of multiple-choice questions first (scope, users, must-haves vs cut, success
+   criteria). The brainstorm IS the CEO's job — skipping it defeats the purpose. Only
+   proceed to the PRD once the user has answered.
 
 **b. Design → SDD**
    Turn the PRD into `.ai-team/sdd.md`: architecture, data model, interfaces/APIs, tech

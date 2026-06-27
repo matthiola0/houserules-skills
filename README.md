@@ -96,8 +96,10 @@ What you get out of the box, with zero customization:
   **no `Co-Authored-By` / AI attribution**, no emojis.
 - **Code, comment & doc style**: "new code reads like existing code" is the top rule;
   comment style and documentation/prose style are recorded too — all asked during init.
-- **First run (init)**: with no `.ai-team/`, the CEO runs a short Q&A, writes
-  `config/style/commit/ceo-brain.md` into the project's `.ai-team/`, and adds `.ai-team/`
+- **First run (init)**: with no `.ai-team/`, the CEO asks just two things — task type, and
+  **"recommended defaults or customize?"**. Recommended needs zero style questions (style
+  auto-detects your stack); customize asks follow-ups. It writes
+  `config/style/commit/ceo-brain.md` into the project's `.ai-team/` and adds `.ai-team/`
   to the project's root `.gitignore` (local-only by default).
 - **Non-code tasks**: roles auto-swap to Drafter / Editor / Fact-checker; the SDD becomes
   an `outline.md`. Same flow.

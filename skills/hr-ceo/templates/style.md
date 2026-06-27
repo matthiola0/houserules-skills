@@ -1,54 +1,38 @@
-# Code style (house rules)
+# Code style (house rules) — recommended defaults
 
-> The source of truth when the Coder writes and the Reviewer audits. Filled during init
-> from your answers; editable any time.
-> A complete filled example: `examples/typescript-web/.ai-team/style.md`.
-> Top principle: **new code should read like the existing code in the project** — the
-> below are defaults for when the existing convention is unclear.
+> These are sensible, language-agnostic defaults so init can be skipped with one choice.
+> Pick "Customize" at init to pin specifics. A worked example with concrete values:
+> `examples/typescript-web/.ai-team/style.md`.
 
 ## General
-- Prefer the conventions already used in the file / project; apply these defaults only
-  when they don't conflict with what's there.
-- Clear > clever. Name things in plain words; avoid pointless abbreviations.
+- New code must read like the existing code; follow the file/project conventions first.
+- Clear > clever. Plain names, no pointless abbreviations.
 - No dead code, no commented-out code.
 
 ## Language / framework
-- Primary language: <e.g. TypeScript / Python>
-- Formatter: <e.g. Prettier / Black / gofmt> — its output is the source of truth
-- Linter: <e.g. ESLint / Ruff>
+- Auto-detect the stack from the project (package.json / pyproject.toml / go.mod / Cargo.toml
+  ...) and follow that language's idioms.
+- Formatter: the project's configured formatter is the source of truth (Prettier / Black /
+  gofmt / rustfmt). If none exists, add the standard one for the stack.
+- Linter: the project's linter; no new warnings on commit.
 
-## Naming
-- Variables/functions: <e.g. camelCase / snake_case>
-- Types/classes: <e.g. PascalCase>
-- Constants: <e.g. UPPER_SNAKE>
-- Filenames: <e.g. kebab-case>
-
-## Formatting
-- Indent: <e.g. 2 spaces>
-- Line width: <e.g. 100>
-- Quotes: <e.g. single>
+## Naming / formatting
+- Follow the language's conventional style (e.g. camelCase in JS/TS, snake_case in Python)
+  and whatever the formatter emits. Don't hand-format around the formatter.
 
 ## Tests
-- Framework: <e.g. Vitest / pytest>
-- Require tests with new features: <yes/no>
+- Add tests for new behavior (happy path + key edge cases) with the project's test framework.
 
 ## Error handling
-- <preferences, e.g.: don't swallow exceptions, validate at boundaries, always validate
-  external input>
+- Validate external input at boundaries; never swallow errors silently.
 
 ## Comments (in code)
-- Default: explain **why**, not restate **what**; match the density of surrounding code.
-- Comment language: <e.g. English>
-- When to comment: <e.g. only non-obvious intent, invariants, gotchas, workarounds; never
-  narrate obvious code>
-- Doc-comments for public APIs: <e.g. JSDoc / Google-style docstrings / rustdoc / none>
-- TODO/FIXME format: <e.g. `// TODO(owner): ...`>
+- Explain why, not what; match the density of surrounding code.
+- Doc-comments on exported/public APIs (JSDoc / docstring / rustdoc as the stack dictates).
+- TODO/FIXME format: `// TODO(owner): ...`
 
 ## Documentation & prose (README, docs, commit bodies)
-- Prose language: <e.g. English>
-- Voice / tone: <e.g. concise, direct, second person; no marketing fluff>
-- Structure: <e.g. lead with the why, short sections, tables for structured info, one idea
-  per sentence>
-- Formatting: code / paths / commands in `backticks`; copy-pasteable fenced blocks for
-  examples; headings in <sentence case / Title Case>
-- Keep docs in sync with behavior — update them in the same change that alters behavior.
+- Concise, direct, second person; no marketing fluff.
+- Lead with the why; short sections; tables for structured info.
+- Code / paths / commands in `backticks`; copy-pasteable fenced blocks; sentence-case headings.
+- Keep docs in sync with behavior — update them in the same change.
