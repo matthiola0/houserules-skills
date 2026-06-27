@@ -29,7 +29,10 @@ skill (the `templates/` folder next to this SKILL.md, i.e.
 `skills/ceo/templates/`), asking the user **multiple-choice questions** (picking is easier
 than answering from scratch):
 - Primary task type? code / writing / research
-- Code style preferences (language, formatting, naming, comment density) → `style.md`
+- Code style preferences (language, formatting, naming) → `style.md`
+- Comment style (when/how to comment, doc-comments, TODO format) → `style.md`
+- Documentation & prose style (tone, structure, formatting for README/docs/commit
+  bodies) → `style.md`
 - Commit style → default applies Conventional Commits prefix (`feat:`/`fix:`/...),
   imperative subject, no AI/Co-Authored-By attribution; just confirm → `commit.md`
 - Which roles to enable (Reviewer / Tester on by default) → `config.md`

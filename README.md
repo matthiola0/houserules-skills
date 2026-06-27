@@ -92,8 +92,8 @@ What you get out of the box, with zero customization:
 - **Brainstorming**: the CEO asks you multiple-choice questions instead of open prompts.
 - **Commit style**: Conventional Commits prefix on (`feat:`/`fix:`/…), imperative subject,
   **no `Co-Authored-By` / AI attribution**, no emojis.
-- **Code style**: "new code reads like existing code" is the top rule; other fields are
-  asked during init.
+- **Code, comment & doc style**: "new code reads like existing code" is the top rule;
+  comment style and documentation/prose style are recorded too — all asked during init.
 - **First run (init)**: with no `.ai-team/`, the CEO runs a short Q&A, writes
   `config/style/commit/ceo-brain.md` into the project's `.ai-team/`, and adds `.ai-team/`
   to the project's root `.gitignore` (local-only by default).

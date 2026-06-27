@@ -17,10 +17,19 @@
 - Use numbered sections (§) + explicit steps in the body, so a dispatched role can follow
   without guessing.
 
-## Doc conventions
+## Doc / prose conventions
+- Voice: concise, direct, second person; no marketing fluff.
+- Lead with the why; short sections; one idea per sentence.
 - Use tables for structured "role / file / responsibility" type information.
 - Always give copy-pasteable fenced code blocks for examples.
 - Cross-reference with relative links (e.g. `[customization.md](docs/customization.md)`).
+- Headings in sentence case. Keep docs in sync with behavior — update them in the same
+  change that alters behavior.
+
+## Comments (in code snippets)
+- This repo's "code" is mostly shell snippets in docs; comment them only to explain intent
+  a reader couldn't infer (e.g. why a `codex` flag is used), never to narrate the obvious.
+- Comment language: English. TODO format: `# TODO(owner): ...`.
 
 ## Consistency
 - Role names are fixed: CEO / Coder / Reviewer / Tester (non-code: Drafter / Editor /
