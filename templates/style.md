@@ -1,33 +1,37 @@
-# 代碼風格（house rules）
+# Code style (house rules)
 
-> Coder 寫代碼、Reviewer 審代碼時都以此為準。init 時依你的回答填寫；隨時可改。
-> 最高原則：**新代碼要讀起來像專案裡既有的代碼**——下列是當既有慣例不明時的預設。
+> The source of truth when the Coder writes and the Reviewer audits. Filled during init
+> from your answers; editable any time.
+> Top principle: **new code should read like the existing code in the project** — the
+> below are defaults for when the existing convention is unclear.
 
-## 通用
-- 優先沿用該檔案 / 該專案既有的慣例，與既有不衝突時才套用本檔預設。
-- 清楚 > 聰明。命名說人話，避免無謂縮寫。
-- 不留死代碼、不留註解掉的程式碼。
-- 註解只寫「為什麼」，不複述「做了什麼」；密度比照周圍代碼。
+## General
+- Prefer the conventions already used in the file / project; apply these defaults only
+  when they don't conflict with what's there.
+- Clear > clever. Name things in plain words; avoid pointless abbreviations.
+- No dead code, no commented-out code.
+- Comments explain "why," not restate "what"; match the density of surrounding code.
 
-## 語言 / 框架
-- 主要語言：<填，如 TypeScript / Python>
-- 格式化工具：<如 Prettier / Black / gofmt>，一切以工具輸出為準
-- Lint：<如 ESLint / Ruff>
+## Language / framework
+- Primary language: <e.g. TypeScript / Python>
+- Formatter: <e.g. Prettier / Black / gofmt> — its output is the source of truth
+- Linter: <e.g. ESLint / Ruff>
 
-## 命名
-- 變數/函式：<如 camelCase / snake_case>
-- 型別/類別：<如 PascalCase>
-- 常數：<如 UPPER_SNAKE>
-- 檔名：<如 kebab-case>
+## Naming
+- Variables/functions: <e.g. camelCase / snake_case>
+- Types/classes: <e.g. PascalCase>
+- Constants: <e.g. UPPER_SNAKE>
+- Filenames: <e.g. kebab-case>
 
-## 排版
-- 縮排：<如 2 spaces>
-- 行寬：<如 100>
-- 引號：<如 single>
+## Formatting
+- Indent: <e.g. 2 spaces>
+- Line width: <e.g. 100>
+- Quotes: <e.g. single>
 
-## 測試
-- 框架：<如 Vitest / pytest>
-- 新功能是否要求附測試：<yes/no>
+## Tests
+- Framework: <e.g. Vitest / pytest>
+- Require tests with new features: <yes/no>
 
-## 錯誤處理
-- <偏好，如：不吞例外、邊界明確驗證、對外輸入一律驗證>
+## Error handling
+- <preferences, e.g.: don't swallow exceptions, validate at boundaries, always validate
+  external input>

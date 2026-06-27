@@ -1,19 +1,21 @@
-# Commit 訊息風格（house rules）
+# Commit message style (house rules)
 
-> Coder 每次 commit 都遵守。預設已套用「乾淨、無 AI 署名」風格，符合多數人習慣。
+> The Coder follows this on every commit. Defaults to a clean, no-AI-attribution style
+> that matches most people's habits.
 
-## 硬規則（不可違反）
-- **絕不**加 `Co-Authored-By` 或任何 AI / Claude / Codex 署名與工具簽名。
-- 不加表情符號、不加廣告行（如「Generated with ...」）。
+## Hard rules (never violate)
+- **Never** add `Co-Authored-By` or any AI / Claude / Codex attribution or tool signature.
+- No emojis, no ad lines (e.g. "Generated with ...").
 
-## 格式
-- 主旨：**祈使句（imperative）**、≤ 50 字、句首大寫、句尾不加句號。
-  - 好：`Add retry to upload client`
-  - 壞：`added retry`、`fixes stuff`
-- 主旨後空一行，再寫 body（非必要可省）。body 說明 **what / why**，不是逐行複述 diff。
-- 一個 commit 一件事；不要把無關變更混在一起。
+## Format
+- Subject: **imperative**, ≤ 50 chars, capitalized first letter, no trailing period.
+  - Good: `Add retry to upload client`
+  - Bad: `added retry`, `fixes stuff`
+- Blank line after the subject, then the body (optional). The body explains **what / why**,
+  not a line-by-line restatement of the diff.
+- One commit, one thing; don't mix unrelated changes.
 
-## 範例
+## Example
 ```
 Add retry with backoff to upload client
 
@@ -21,5 +23,5 @@ Uploads failed intermittently on flaky networks. Retry up to 3 times
 with exponential backoff so transient 5xx no longer surface to users.
 ```
 
-## 選配慣例（init 可開啟）
-- Conventional Commits 前綴（`feat:` / `fix:` / `refactor:` ...）：<on/off>
+## Optional conventions (can enable at init)
+- Conventional Commits prefixes (`feat:` / `fix:` / `refactor:` ...): <on/off>

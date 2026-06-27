@@ -1,19 +1,20 @@
-# Commit 訊息風格 — houserules-skills 本專案（live）
+# Commit message style — this repo (houserules-skills), live
 
-> 本 repo 自己遵守的 commit 規矩。git 歷史就是照這份寫的。
+> The commit rules this repo follows. Its git history is written to this.
 
-## 硬規則（不可違反）
-- **絕不**加 `Co-Authored-By` 或任何 AI / Claude / Codex 署名與工具簽名。
-- 不加表情符號、不加廣告行（如「Generated with ...」）。
+## Hard rules (never violate)
+- **Never** add `Co-Authored-By` or any AI / Claude / Codex attribution or tool signature.
+- No emojis, no ad lines (e.g. "Generated with ...").
 
-## 格式
-- 主旨：祈使句（imperative）、≤ 50 字、句首大寫、句尾不加句號。
-  - 好：`Add reviewer skill with Codex code-review mode`
-  - 壞：`added reviewer`、`update stuff`
-- 主旨後空一行，再寫 body（非必要可省）。body 說明 what / why，不逐行複述 diff。
-- 一個 commit 一件事。
+## Format
+- Subject: imperative, ≤ 50 chars, capitalized first letter, no trailing period.
+  - Good: `Add reviewer skill with Codex code-review mode`
+  - Bad: `added reviewer`, `update stuff`
+- Blank line after the subject, then the body (optional). The body explains what / why,
+  not a line-by-line restatement of the diff.
+- One commit, one thing.
 
-## 範例（取自本 repo 首個 commit）
+## Example (from this repo's first commit)
 ```
 Add houserules-skills AI agent team skill pack
 
@@ -22,5 +23,5 @@ skills. CEO orchestrates a brainstorm -> PRD -> SDD -> ... loop; Reviewer
 runs on Codex CLI for dual-model review. ...
 ```
 
-## 本專案慣例
-- Conventional Commits 前綴：off（保持純祈使句風格）。
+## Project conventions
+- Conventional Commits prefixes: off (keep the plain imperative style).
