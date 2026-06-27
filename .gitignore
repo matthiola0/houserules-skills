@@ -1,0 +1,13 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+
+# Node (if any tooling is added later)
+node_modules/
+
+# Per-project team artifacts should live in the consuming project, not here.
+# (This repo ships templates/, not a live .ai-team/.)
+.ai-team/
