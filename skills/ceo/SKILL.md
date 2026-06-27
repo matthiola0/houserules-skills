@@ -28,8 +28,8 @@ When `.ai-team/` is missing, generate settings from the `templates/` files, aski
 user **multiple-choice questions** (picking is easier than answering from scratch):
 - Primary task type? code / writing / research
 - Code style preferences (language, formatting, naming, comment density) → `style.md`
-- Commit style → default already applies "imperative subject, no AI/Co-Authored-By
-  attribution"; just confirm → `commit.md`
+- Commit style → default applies Conventional Commits prefix (`feat:`/`fix:`/...),
+  imperative subject, no AI/Co-Authored-By attribution; just confirm → `commit.md`
 - Which roles to enable (Reviewer / Tester on by default) → `config.md`
 - Which CEO brain (defaults to a first-principles framework) → `ceo-brain.md`
 Copy the matching files from `templates/` into the project's `.ai-team/` and fill in the

@@ -8,20 +8,27 @@
 - No emojis, no ad lines (e.g. "Generated with ...").
 
 ## Format
-- Subject: **imperative**, ≤ 50 chars, capitalized first letter, no trailing period.
-  - Good: `Add retry to upload client`
-  - Bad: `added retry`, `fixes stuff`
+- **Conventional Commits prefix: on (default).** Subject form:
+  `<type>(<optional scope>): <description>`
+  - Types: `feat` (feature), `fix` (bug), `docs`, `refactor`, `test`, `chore`,
+    `style` (formatting only), `perf`. Breaking change: add `!` (`feat!:`) or a
+    `BREAKING CHANGE:` body footer.
+  - Description: **imperative**, lowercase first letter, no trailing period.
+  - Whole subject ≤ 50 chars where practical.
+  - Good: `feat: add retry to upload client`, `fix(auth): handle expired token`
+  - Bad: `added retry`, `feat: Added retry.`, `fixes stuff`
 - Blank line after the subject, then the body (optional). The body explains **what / why**,
   not a line-by-line restatement of the diff.
 - One commit, one thing; don't mix unrelated changes.
 
 ## Example
 ```
-Add retry with backoff to upload client
+feat: add retry with backoff to upload client
 
 Uploads failed intermittently on flaky networks. Retry up to 3 times
 with exponential backoff so transient 5xx no longer surface to users.
 ```
 
-## Optional conventions (can enable at init)
-- Conventional Commits prefixes (`feat:` / `fix:` / `refactor:` ...): <on/off>
+## Toggle
+- To turn the prefix off and use plain imperative subjects (e.g. `Add retry to upload
+  client`), set Conventional Commits prefixes: off here.

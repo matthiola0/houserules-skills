@@ -7,16 +7,18 @@
 - No emojis, no ad lines (e.g. "Generated with ...").
 
 ## Format
-- Subject: imperative, ≤ 50 chars, capitalized first letter, no trailing period.
-  - Good: `Add reviewer skill with Codex code-review mode`
+- **Conventional Commits prefix: on.** Subject: `<type>(<optional scope>): <description>`.
+  - Types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, `style`, `perf`.
+  - Description: imperative, lowercase first letter, no trailing period; subject ≤ 50 chars.
+  - Good: `docs: translate all content to English`, `feat: add reviewer code-review mode`
   - Bad: `added reviewer`, `update stuff`
 - Blank line after the subject, then the body (optional). The body explains what / why,
   not a line-by-line restatement of the diff.
 - One commit, one thing.
 
-## Example (from this repo's first commit)
+## Example
 ```
-Add houserules-skills AI agent team skill pack
+feat: add houserules-skills AI agent team skill pack
 
 Four-role team (CEO/Coder/Reviewer/Tester) as installable Claude Code
 skills. CEO orchestrates a brainstorm -> PRD -> SDD -> ... loop; Reviewer
@@ -24,4 +26,6 @@ runs on Codex CLI for dual-model review. ...
 ```
 
 ## Project conventions
-- Conventional Commits prefixes: off (keep the plain imperative style).
+- Conventional Commits prefixes: on.
+- Note: commits before `docs: enable Conventional Commits prefix by default` predate this
+  switch and use plain imperative subjects.
