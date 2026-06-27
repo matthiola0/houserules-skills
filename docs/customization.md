@@ -11,9 +11,8 @@ skills/ceo/templates/ (used by init)               .ai-team/style.md       ← c
                                                    .ai-team/ceo-brain.md   ← CEO thinking
 ```
 
-On init the CEO also drops a `.ai-team/.gitignore` into your project: it keeps the house
-rules and specs under version control and ignores only the regenerable `reviews/` and
-`tests/` artifacts.
+On init the CEO adds `.ai-team/` to your project's **root** `.gitignore`, so the whole
+team working directory is local-only by default and stays out of version control.
 
 **Principle**: the workflow and personas come from the skills (stable); the "rules" —
 style, commit, CEO brain — come from the project layer (variable). You **set it once**, and
@@ -44,6 +43,8 @@ Replace `.ai-team/ceo-brain.md`. The default is Musk; to use someone else see
 
 1. One-time: `npx skills add <your-account>/houserules-skills` (global install).
 2. Each new project: `/ceo` → first run walks init to generate that project's `.ai-team/`.
-3. Commit `.ai-team/config.md`, `style.md`, `commit.md`, `ceo-brain.md` into version
-   control, so your team / future-you share the same rules. `reviews/` and `tests/` can be
-   added to `.gitignore` as needed.
+3. By default `.ai-team/` is git-ignored (local-only), so each project / machine regenerates
+   it via init. If instead you want to **share** the same rules across machines or a team,
+   remove the `.ai-team/` line from `.gitignore` and commit the config files
+   (`config.md`, `style.md`, `commit.md`, `ceo-brain.md`); you can keep `reviews/` and
+   `tests/` ignored.

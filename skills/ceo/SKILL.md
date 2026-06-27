@@ -35,9 +35,10 @@ than answering from scratch):
 - Which roles to enable (Reviewer / Tester on by default) → `config.md`
 - Which CEO brain (defaults to a first-principles framework) → `ceo-brain.md`
 Copy the matching files from this skill's `templates/` into the project's `.ai-team/` and
-fill in the answers. Also copy `templates/ai-team.gitignore` to `.ai-team/.gitignore` so
-the project commits its house rules and specs but ignores the regenerable `reviews/` and
-`tests/` artifacts. When done, tell the user "the team is ready."
+fill in the answers. Then add `.ai-team/` to the project's **root** `.gitignore` (create
+the file if it's missing; skip if the entry is already there) so the team's working
+directory stays local-only and out of version control. When done, tell the user "the team
+is ready."
 
 ## 2. Detect task type and pick a flow
 

@@ -1,5 +1,0 @@
-# Dropped by /ceo init into the project's .ai-team/ as .ai-team/.gitignore
-# Keep the house rules and specs under version control; ignore only the
-# regenerable artifacts.
-reviews/
-tests/

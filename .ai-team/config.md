@@ -3,6 +3,9 @@
 > This is the repo's own live config (dogfooding): houserules-skills is developed with
 > these very rules. It also doubles as a filled-in example for new users — compare it to
 > the blank skills/ceo/templates/ to see what a completed config looks like.
+>
+> Note: in a normal consuming project, init git-ignores the whole .ai-team/. This repo
+> deliberately commits its .ai-team/ instead, so the example is visible on GitHub.
 
 ## Project
 - Name: houserules-skills
