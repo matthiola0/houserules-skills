@@ -19,10 +19,10 @@ A team of four roles. You talk only to the **CEO**; it dispatches the rest:
 
 | Role | Powered by | Responsibility |
 |------|-----------|----------------|
-| **CEO** (`/ceo`) | Claude (swappable brain, defaults to a Musk first-principles framework) | Brainstorms with you, produces the PRD/SDD/Plan, dispatches work, reports back. The only role you talk to. |
-| **Coder** (`/coder`) | Claude | Implements the SDD/Plan and commits per your style. |
-| **Reviewer** (`/reviewer`) | **Codex (a different model)** | Design review + code review, structured reports, loops until it passes. |
-| **Tester** (`/tester`) | Claude + MCP | Runs real user-scenario tests / fact-checks. |
+| **CEO** (`/hr-ceo`) | Claude (swappable brain, defaults to a Musk first-principles framework) | Brainstorms with you, produces the PRD/SDD/Plan, dispatches work, reports back. The only role you talk to. |
+| **Coder** (`/hr-coder`) | Claude | Implements the SDD/Plan and commits per your style. |
+| **Reviewer** (`/hr-reviewer`) | **Codex (a different model)** | Design review + code review, structured reports, loops until it passes. |
+| **Tester** (`/hr-tester`) | Claude + MCP | Runs real user-scenario tests / fact-checks. |
 
 **Dual-model review:** Claude writes, Codex reviews. Different models have different
 blind spots, so review is stricter.
@@ -65,7 +65,7 @@ Requirements:
 - (optional) Playwright-MCP / XcodeBuildMCP (Tester running web / iOS tests)
 
 The installer (vercel-labs/skills) scans the `skills/` catalog layout and installs each
-role as its own skill. The skills are named `ceo` / `coder` / `reviewer` / `tester` — if any
+role as its own skill. The skills are named `hr-ceo` / `hr-coder` / `hr-reviewer` / `hr-tester` — if any
 collide with skills you already have, rename them (see
 [docs/customization.md](docs/customization.md#tweak-role-behavior--rename-skills)).
 
@@ -74,7 +74,7 @@ collide with skills you already have, rename them (see
 ## Quick start
 
 1. Open Claude Code in your project directory.
-2. Type `/ceo` and describe what you want to build.
+2. Type `/hr-ceo` and describe what you want to build.
 3. On first run it walks an **init Q&A** and generates your settings under `.ai-team/`
    (style, commit, CEO brain).
 4. The CEO then runs the whole team through brainstorm → design → build → review → test.

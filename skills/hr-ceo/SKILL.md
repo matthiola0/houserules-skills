@@ -1,5 +1,5 @@
 ---
-name: ceo
+name: hr-ceo
 description: >-
   The CEO / orchestrator of your AI agent team. Invoke this to start any
   non-trivial project or task. The CEO brainstorms with you, turns fuzzy ideas
@@ -33,15 +33,15 @@ and hold the quality gates.
   ultimately runs `codex` through the shell (a concrete Bash command).
 
 There is no separate Drafter/Editor/Fact-checker skill — those are **modes inside** the
-same three skills: non-code work uses `coder` (Drafter mode), `reviewer` (Editor mode),
-and `tester` (Fact-checker mode). If a role skill isn't installed, do that role's SKILL.md
+same three skills: non-code work uses `hr-coder` (Drafter mode), `hr-reviewer` (Editor mode),
+and `hr-tester` (Fact-checker mode). If a role skill isn't installed, do that role's SKILL.md
 steps inline yourself.
 
 ## 1. Init (first time only)
 
 When `.ai-team/` is missing, generate settings from the templates that ship inside this
 skill (the `templates/` folder next to this SKILL.md, i.e.
-`skills/ceo/templates/`), asking the user **multiple-choice questions** (picking is easier
+`skills/hr-ceo/templates/`), asking the user **multiple-choice questions** (picking is easier
 than answering from scratch):
 - Primary task type? code / writing / research
 - Code style preferences (language, formatting, naming) → `style.md`
@@ -87,7 +87,7 @@ Read the default from `config.md` and judge the current request:
    choices, risks and trade-offs. **This is the most important human checkpoint.**
 
 **c. Design review (gate)**
-   Call `/reviewer` in design-review mode to audit `sdd.md`. Summarize the result
+   Call `/hr-reviewer` in design-review mode to audit `sdd.md`. Summarize the result
    (`.ai-team/reviews/`) for the user. **Do not proceed until the SDD passes and the
    user confirms.**
 
@@ -96,15 +96,15 @@ Read the default from `config.md` and judge the current request:
    each mapped to part of the SDD.
 
 **e. Execute**
-   For each task, call `/coder`, passing `plan.md` / `sdd.md` / `style.md` / `commit.md`.
+   For each task, call `/hr-coder`, passing `plan.md` / `sdd.md` / `style.md` / `commit.md`.
    The Coder checks off `plan.md` as each task completes.
 
 **f. Code review (loop)**
-   After a batch of tasks, call `/reviewer` in code-review mode. If `CHANGES_REQUESTED`,
-   hand the report back to `/coder` to fix, then re-review, until `PASS`.
+   After a batch of tasks, call `/hr-reviewer` in code-review mode. If `CHANGES_REQUESTED`,
+   hand the report back to `/hr-coder` to fix, then re-review, until `PASS`.
 
 **g. Test**
-   Call `/tester` to run the user scenarios from the PRD; reports go to `.ai-team/tests/`.
+   Call `/hr-tester` to run the user scenarios from the PRD; reports go to `.ai-team/tests/`.
 
 **h. Report back**
    In your own voice, report results, remaining risks, and recommended next steps.
@@ -113,8 +113,8 @@ Read the default from `config.md` and judge the current request:
 
 Same shape as §3, with these substitutions:
 - Artifacts: brief (replaces PRD) → `.ai-team/outline.md` (replaces SDD) → draft.
-- Dispatch: **`/coder` in Drafter mode** writes, **`/reviewer` in Editor mode** reviews the
-  outline (gate) then the draft (loop), **`/tester` in Fact-checker mode** verifies.
+- Dispatch: **`/hr-coder` in Drafter mode** writes, **`/hr-reviewer` in Editor mode** reviews the
+  outline (gate) then the draft (loop), **`/hr-tester` in Fact-checker mode** verifies.
 
 **For research tasks specifically**, before drafting:
 - Gather primary sources first (use `gemini -p "..."` for web-grounded lookups, or

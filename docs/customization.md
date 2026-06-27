@@ -5,8 +5,8 @@ projects yet customizable per project.
 
 ```
 Skill body (defaults, don't edit after install)   Project layer (.ai-team/, per project, git-ignored by default, overrides)
-skills/ceo|coder|reviewer|tester/SKILL.md          .ai-team/config.md      ← which roles, models
-skills/ceo/templates/ (used by init)               .ai-team/style.md       ← code/writing style
+skills/hr-ceo|hr-coder|hr-reviewer|hr-tester/SKILL.md          .ai-team/config.md      ← which roles, models
+skills/hr-ceo/templates/ (used by init)               .ai-team/style.md       ← code/writing style
                                                    .ai-team/commit.md      ← commit style
                                                    .ai-team/ceo-brain.md   ← CEO thinking
 ```
@@ -37,14 +37,14 @@ Replace `.ai-team/ceo-brain.md`. The default is Musk; to use someone else see
 ### Tweak role behavior / rename skills
 - To fine-tune how a role works: drop a supplement like `coder.overrides.md` into
   `.ai-team/` and note it in `config.md`; the CEO will pass it along when dispatching.
-- If a command name like `/ceo` collides with your other skills: rename the `name` in
-  `skills/<role>/SKILL.md` frontmatter and the folder (e.g. `hr-ceo`), and update the
+- If a command name like `/hr-ceo` collides with your other skills: rename the `name` in
+  `skills/<role>/SKILL.md` frontmatter and the folder (e.g. add your own prefix), and update the
   dispatch references in the CEO SKILL.md accordingly.
 
 ## Cross-project reuse
 
 1. One-time: `npx skills add <your-account>/houserules-skills` (global install).
-2. Each new project: `/ceo` → first run walks init to generate that project's `.ai-team/`.
+2. Each new project: `/hr-ceo` → first run walks init to generate that project's `.ai-team/`.
 3. By default `.ai-team/` is git-ignored (local-only), so each project / machine regenerates
    it via init. If instead you want to **share** the same rules across machines or a team,
    remove the `.ai-team/` line from `.gitignore` and commit the config files

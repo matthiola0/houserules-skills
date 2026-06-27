@@ -22,7 +22,7 @@ is **loose**: the CEO runs fine without nuwa (it has a default brain); nuwa just
    - "How to apply to this CEO role" — map the person's thinking to PRD/SDD/dispatch/gates.
    - "Honest limitations" — a reminder that this is a public-info approximation and that the
      style doesn't fit every context.
-4. The next `/ceo` will use the new brain.
+4. The next `/hr-ceo` will use the new brain.
 
 ## Notes
 - `ceo-brain.md` is a **lens / decision framework**, not role-play — the goal is a different

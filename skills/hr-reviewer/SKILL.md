@@ -1,5 +1,5 @@
 ---
-name: reviewer
+name: hr-reviewer
 description: >-
   The independent reviewer of your AI agent team, powered by Codex CLI (a
   DIFFERENT model from the Claude Coder, so blind spots differ and review is

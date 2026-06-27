@@ -1,5 +1,5 @@
 ---
-name: tester
+name: hr-tester
 description: >-
   The acceptance tester of your AI agent team. Dispatched by the CEO after code
   review passes, to validate the product against the real user scenarios in

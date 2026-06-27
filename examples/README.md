@@ -2,7 +2,7 @@
 
 These are **complete, filled-in** reference configs to copy from when init asks you the
 style questions. The blank templates with `<...>` placeholders live in
-`skills/ceo/templates/`; here you can see what a finished version looks like.
+`skills/hr-ceo/templates/`; here you can see what a finished version looks like.
 
 | Example | Kind | What it shows |
 |---------|------|---------------|

@@ -12,3 +12,7 @@ node_modules/
 # committed as a live example. Only the generated artifacts are ignored.
 .ai-team/reviews/
 .ai-team/tests/
+
+# Installer scratch (project-scope installs)
+.agents/
+skills-lock.json

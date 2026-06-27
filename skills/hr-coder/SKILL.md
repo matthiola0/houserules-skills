@@ -1,5 +1,5 @@
 ---
-name: coder
+name: hr-coder
 description: >-
   The implementer of your AI agent team. Dispatched by the CEO to execute tasks
   from .ai-team/plan.md one at a time, strictly following .ai-team/sdd.md (the
@@ -38,7 +38,7 @@ your job is to **turn the SDD into clean code faithfully** and keep the style co
 
 ## When you receive a review report
 
-The CEO hands you `/reviewer`'s `.ai-team/reviews/NNN-*.md`. Address each item:
+The CEO hands you `/hr-reviewer`'s `.ai-team/reviews/NNN-*.md`. Address each item:
 - Fixed → mark the item resolved + a one-line note.
 - Disagree → state your reasoning and send it back to the CEO to decide; do not silently
   ignore.
