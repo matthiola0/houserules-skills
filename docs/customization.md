@@ -6,10 +6,14 @@ projects yet customizable per project.
 ```
 Skill body (defaults, don't edit after install)   Project layer (.ai-team/, travels with the project, overrides)
 skills/ceo|coder|reviewer|tester/SKILL.md          .ai-team/config.md      ← which roles, models
-templates/ (used by init)                          .ai-team/style.md       ← code/writing style
+skills/ceo/templates/ (used by init)               .ai-team/style.md       ← code/writing style
                                                    .ai-team/commit.md      ← commit style
                                                    .ai-team/ceo-brain.md   ← CEO thinking
 ```
+
+On init the CEO also drops a `.ai-team/.gitignore` into your project: it keeps the house
+rules and specs under version control and ignores only the regenerable `reviews/` and
+`tests/` artifacts.
 
 **Principle**: the workflow and personas come from the skills (stable); the "rules" —
 style, commit, CEO brain — come from the project layer (variable). You **set it once**, and

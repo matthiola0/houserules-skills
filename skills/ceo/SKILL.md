@@ -24,16 +24,20 @@ and hold the quality gates.
 
 ## 1. Init (first time only)
 
-When `.ai-team/` is missing, generate settings from the `templates/` files, asking the
-user **multiple-choice questions** (picking is easier than answering from scratch):
+When `.ai-team/` is missing, generate settings from the templates that ship inside this
+skill (the `templates/` folder next to this SKILL.md, i.e.
+`skills/ceo/templates/`), asking the user **multiple-choice questions** (picking is easier
+than answering from scratch):
 - Primary task type? code / writing / research
 - Code style preferences (language, formatting, naming, comment density) → `style.md`
 - Commit style → default applies Conventional Commits prefix (`feat:`/`fix:`/...),
   imperative subject, no AI/Co-Authored-By attribution; just confirm → `commit.md`
 - Which roles to enable (Reviewer / Tester on by default) → `config.md`
 - Which CEO brain (defaults to a first-principles framework) → `ceo-brain.md`
-Copy the matching files from `templates/` into the project's `.ai-team/` and fill in the
-answers. When done, tell the user "the team is ready."
+Copy the matching files from this skill's `templates/` into the project's `.ai-team/` and
+fill in the answers. Also copy `templates/ai-team.gitignore` to `.ai-team/.gitignore` so
+the project commits its house rules and specs but ignores the regenerable `reviews/` and
+`tests/` artifacts. When done, tell the user "the team is ready."
 
 ## 2. Detect task type and pick a flow
 
