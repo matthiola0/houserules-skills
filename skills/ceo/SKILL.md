@@ -19,8 +19,15 @@ and hold the quality gates.
 
 1. Read `.ai-team/ceo-brain.md` — your thinking framework (defaults to first-principles).
    Interact with the user using its decision style.
-2. Read `.ai-team/config.md`, `style.md`, `commit.md` (if present).
+2. Read `.ai-team/config.md`, `.ai-team/style.md`, `.ai-team/commit.md` (if present).
 3. **If `.ai-team/config.md` does not exist → run §1 init first**, otherwise go to §2.
+
+**How you dispatch a role**: invoke the corresponding skill (`coder`, `reviewer`,
+`tester`) with the **Skill tool**, pointing it at the relevant `.ai-team/` files. There is
+no separate Drafter/Editor/Fact-checker skill — those are **modes inside** the same three
+skills: non-code work uses `coder` (Drafter mode), `reviewer` (Editor mode), and `tester`
+(Fact-checker mode). If a role skill isn't installed, fall back to doing that role's
+SKILL.md steps inline yourself.
 
 ## 1. Init (first time only)
 
@@ -37,11 +44,22 @@ than answering from scratch):
   imperative subject, no AI/Co-Authored-By attribution; just confirm → `commit.md`
 - Which roles to enable (Reviewer / Tester on by default) → `config.md`
 - Which CEO brain (defaults to a first-principles framework) → `ceo-brain.md`
-Copy the matching files from this skill's `templates/` into the project's `.ai-team/` and
-fill in the answers. Then add `.ai-team/` to the project's **root** `.gitignore` (create
-the file if it's missing; skip if the entry is already there) so the team's working
-directory stays local-only and out of version control. When done, tell the user "the team
-is ready."
+Copy the matching files from this skill's `templates/` into the project's `.ai-team/`,
+then **fill in every `<...>` placeholder** from the answers — leave no `<...>` behind.
+Fields that must be replaced:
+- `config.md`: project name, default task type, enabled roles.
+- `style.md`: language, formatter, linter, naming, formatting, tests, error handling,
+  comment style, doc/prose style.
+- `commit.md`: confirm or change the Conventional Commits toggle.
+- `ceo-brain.md`: keep the default, or replace with another brain.
+
+Then:
+1. Create the artifact directories `.ai-team/reviews/` and `.ai-team/tests/` (the Reviewer
+   and Tester write there).
+2. Add `.ai-team/` to the project's **root** `.gitignore` (create the file if missing; skip
+   if the entry is already there) so the team's working directory stays local-only.
+
+When done, tell the user "the team is ready."
 
 ## 2. Detect task type and pick a flow
 
@@ -85,9 +103,17 @@ Read the default from `config.md` and judge the current request:
 
 ## 4. Non-code flow
 
-Maps to: brief (replaces PRD) → `outline.md` (replaces SDD) → Editor reviews the outline
-(gate) → Drafter writes → Editor reviews the draft (loop) → Fact-checker verifies →
-report back. See each role's "non-code mode" section.
+Same shape as §3, with these substitutions:
+- Artifacts: brief (replaces PRD) → `.ai-team/outline.md` (replaces SDD) → draft.
+- Dispatch: **`/coder` in Drafter mode** writes, **`/reviewer` in Editor mode** reviews the
+  outline (gate) then the draft (loop), **`/tester` in Fact-checker mode** verifies.
+
+**For research tasks specifically**, before drafting:
+- Gather primary sources first (use `gemini -p "..."` for web-grounded lookups, or
+  `/agent-reach` if available). Record each source (title + URL/citation) in the outline.
+- Set an evidence bar in the brief: every non-obvious claim needs at least one cited
+  source; mark anything unverified as an open question, don't bury it.
+- The Fact-checker then checks the draft's claims against those sources, not from scratch.
 
 ## Message-passing rules
 

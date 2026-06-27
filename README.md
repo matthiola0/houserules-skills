@@ -55,17 +55,19 @@ Roles pass messages through files under `.ai-team/` (traceable, tool-agnostic).
 ## Install
 
 ```bash
-npx skills add <your-account>/houserules-skills
+npx skills add OWNER/REPO        # replace OWNER/REPO with the published GitHub slug
 ```
 
 Requirements:
 - **Claude Code** (CEO / Coder / Tester)
-- **Codex CLI** ≥ 0.124 (Reviewer) — `codex` runnable in your terminal
+- **Codex CLI** >= 0.124 (Reviewer) — `codex` runnable in your terminal
 - (optional) **gemini-cli** (research / fact-check tasks)
 - (optional) Playwright-MCP / XcodeBuildMCP (Tester running web / iOS tests)
 
 The installer (vercel-labs/skills) scans the `skills/` catalog layout and installs each
-role as its own skill.
+role as its own skill. The skills are named `ceo` / `coder` / `reviewer` / `tester` — if any
+collide with skills you already have, rename them (see
+[docs/customization.md](docs/customization.md#tweak-role-behavior--rename-skills)).
 
 ---
 
@@ -90,7 +92,7 @@ What you get out of the box, with zero customization:
 - **Flow (code)**: brainstorm → PRD → SDD → **design-review gate (must pass + you confirm
   before any code)** → plan → code → code-review loop until `PASS` → scenario tests → report.
 - **Brainstorming**: the CEO asks you multiple-choice questions instead of open prompts.
-- **Commit style**: Conventional Commits prefix on (`feat:`/`fix:`/…), imperative subject,
+- **Commit style**: Conventional Commits prefix on (`feat:`/`fix:`/...), imperative subject,
   **no `Co-Authored-By` / AI attribution**, no emojis.
 - **Code, comment & doc style**: "new code reads like existing code" is the top rule;
   comment style and documentation/prose style are recorded too — all asked during init.
@@ -108,17 +110,17 @@ across projects.**
 
 ## Customization (two layers)
 
-The skill body ships fixed defaults; your per-project settings under `.ai-team/` travel
-with the project and override them:
+The skill body ships fixed defaults; each project gets its own settings under `.ai-team/`
+that override them. By default `.ai-team/` is git-ignored (local to each project); to share
+the same rules across machines or a team, un-ignore and commit it — see
+[docs/customization.md](docs/customization.md).
 
 | File | Purpose |
 |------|---------|
 | `.ai-team/config.md` | Master switch: which roles are on, models, task type |
-| `.ai-team/style.md` | Code style |
+| `.ai-team/style.md` | Code, comment & documentation style |
 | `.ai-team/commit.md` | Commit message style |
 | `.ai-team/ceo-brain.md` | CEO's thinking framework (swappable) |
-
-See [docs/customization.md](docs/customization.md).
 
 ## Swapping the CEO brain (nuwa)
 

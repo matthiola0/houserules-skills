@@ -20,7 +20,8 @@ does what the PRD says.
 1. Read `.ai-team/prd.md` and extract the verifiable **user scenarios / acceptance
    criteria** (happy path + important edge cases).
 2. Pick the right execution method:
-   - **Web app** → Playwright-MCP (or `/browse`): actually click, fill forms, screenshot.
+   - **Web app** → any available browser automation tool (Playwright-MCP, or the `/browse`
+     skill if installed): actually click, fill forms, screenshot.
    - **iOS** → XcodeBuildMCP running the simulator.
    - **CLI / library / backend** → actually run it, hit the API, run an end-to-end script.
 3. Walk each scenario and record: steps → expected → actual → pass/fail (on failure attach

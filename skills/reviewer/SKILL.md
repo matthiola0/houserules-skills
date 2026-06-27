@@ -17,8 +17,12 @@ organize its feedback into a structured report**, not to substitute Claude's own
 for Codex's review (the value of dual-model review lives exactly here).
 
 Pre-check: `codex` must be runnable in the terminal (`codex --version`). If not, report to
-the CEO that the Reviewer is unavailable and suggest using the plugin or installing the
-Codex CLI.
+the CEO that the Reviewer is unavailable, and suggest the fallback: install the Codex CLI
+(`npm i -g @openai/codex`, then `codex login`), or use the Codex Claude Code plugin (the
+`/codex` skill) if it is installed.
+
+> Commands below are shown in bash. On Windows PowerShell, put each command on one line
+> (drop the `\` line continuations) or use a backtick `` ` `` to continue lines.
 
 ## Mode A: Design review (audit the SDD, before building)
 
@@ -26,7 +30,7 @@ Have Codex read the PRD + SDD and find architecture-level issues (the most expen
 to get wrong):
 
 ```bash
-codex exec -s read-only -o .ai-team/reviews/ceo-tmp.txt \
+codex exec -s read-only -o .ai-team/reviews/codex-design-raw.txt \
   "Read .ai-team/prd.md and .ai-team/sdd.md. Perform a DESIGN review. Check:
    (1) does the design satisfy the PRD? (2) architectural risks, scalability,
    data-model flaws, missing edge cases, security; (3) simpler alternatives.
@@ -39,18 +43,21 @@ Read Codex's output (stdout and the `-o` file) and organize it into
 
 ## Mode B: Code review (audit the diff, after building)
 
-Codex has a built-in code reviewer that targets uncommitted / specified changes directly:
+Codex has a built-in code reviewer. Because the Coder commits each task, the default is to
+review the **committed range** for this batch, not just the working tree:
 
 ```bash
-# Review uncommitted changes (staged + unstaged + untracked)
-codex review --uncommitted --title "<what this batch of tasks does>"
+# Default: review everything this batch added since the base branch
+codex review --base main --title "<what this batch of tasks does>"
 
-# Or review against a base branch
-codex review --base main
+# If the Coder left the batch uncommitted on purpose, review the working tree instead:
+codex review --uncommitted --title "<what this batch of tasks does>"
 ```
 
-`codex review` prints its findings to the terminal — read that output and organize it into
-a structured report at `.ai-team/reviews/NNN-code-review.md`.
+Pick `--base <branch>` to match the project's base (e.g. `main`); if there is no base
+branch, review a commit range with `git diff <first>^..<last>` piped into
+`codex exec -s read-only -`. `codex review` prints its findings to the terminal — read that
+output and organize it into a structured report at `.ai-team/reviews/NNN-code-review.md`.
 
 ## Report format (shared by both modes)
 
