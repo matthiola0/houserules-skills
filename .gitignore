@@ -8,6 +8,7 @@ Thumbs.db
 # Node (if any tooling is added later)
 node_modules/
 
-# Per-project team artifacts should live in the consuming project, not here.
-# (This repo ships templates/, not a live .ai-team/.)
-.ai-team/
+# This repo dogfoods its own house rules: .ai-team/ config files are
+# committed as a live example. Only the generated artifacts are ignored.
+.ai-team/reviews/
+.ai-team/tests/
