@@ -19,7 +19,7 @@ A team of four roles. You talk only to the **CEO**; it dispatches the rest:
 
 | Role | Powered by | Responsibility |
 |------|-----------|----------------|
-| **CEO** (`/ceo`) | Claude (swappable brain, defaults to a first-principles framework) | Brainstorms with you, produces the PRD/SDD/Plan, dispatches work, reports back. The only role you talk to. |
+| **CEO** (`/ceo`) | Claude (swappable brain, defaults to a Musk first-principles framework) | Brainstorms with you, produces the PRD/SDD/Plan, dispatches work, reports back. The only role you talk to. |
 | **Coder** (`/coder`) | Claude | Implements the SDD/Plan and commits per your style. |
 | **Reviewer** (`/reviewer`) | **Codex (a different model)** | Design review + code review, structured reports, loops until it passes. |
 | **Tester** (`/tester`) | Claude + MCP | Runs real user-scenario tests / fact-checks. |
@@ -79,6 +79,33 @@ role as its own skill.
 
 ---
 
+## Default mode
+
+What you get out of the box, with zero customization:
+
+- **Roles**: CEO + Coder + Reviewer + Tester, all on. You talk only to the CEO.
+- **Models**: Claude writes (CEO, Coder, Tester); **Codex CLI reviews** — a different model,
+  so review is stricter (dual-model review).
+- **CEO brain**: Elon Musk first-principles framework (`ceo-brain.md`), swappable.
+- **Flow (code)**: brainstorm → PRD → SDD → **design-review gate (must pass + you confirm
+  before any code)** → plan → code → code-review loop until `PASS` → scenario tests → report.
+- **Brainstorming**: the CEO asks you multiple-choice questions instead of open prompts.
+- **Commit style**: Conventional Commits prefix on (`feat:`/`fix:`/…), imperative subject,
+  **no `Co-Authored-By` / AI attribution**, no emojis.
+- **Code style**: "new code reads like existing code" is the top rule; other fields are
+  asked during init.
+- **First run (init)**: with no `.ai-team/`, the CEO runs a short Q&A, writes
+  `config/style/commit/ceo-brain.md` into the project's `.ai-team/`, and adds `.ai-team/`
+  to the project's root `.gitignore` (local-only by default).
+- **Non-code tasks**: roles auto-swap to Drafter / Editor / Fact-checker; the SDD becomes
+  an `outline.md`. Same flow.
+- **Messaging**: all roles communicate through files under `.ai-team/`; `plan.md`
+  checkboxes are the progress board.
+
+In one line: **Claude writes, Codex reviews, a Musk-style brain orchestrates; design must
+pass before any code; commits are clean with no AI attribution; set it once and reuse
+across projects.**
+
 ## Customization (two layers)
 
 The skill body ships fixed defaults; your per-project settings under `.ai-team/` travel
@@ -95,7 +122,7 @@ See [docs/customization.md](docs/customization.md).
 
 ## Swapping the CEO brain (nuwa)
 
-By default the CEO uses a first-principles framework. To use someone else's, distill
+By default the CEO uses a Musk first-principles framework. To use someone else's, distill
 their cognitive framework with [nuwa-skill](https://github.com/alchaincyf/nuwa-skill)
 and paste it into `.ai-team/ceo-brain.md`. See
 [docs/nuwa-integration.md](docs/nuwa-integration.md).
