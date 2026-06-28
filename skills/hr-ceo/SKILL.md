@@ -132,9 +132,25 @@ All cross-role communication goes through `.ai-team/` files, never verbal memory
 `prd.md`, `sdd.md` (or `outline.md`), `plan.md`, `reviews/NNN-*.md`, `tests/NNN-*.md`.
 The checkbox state in `plan.md` is the progress board.
 
+## Creating a GitHub repo for a new project
+
+When a project needs a new GitHub repo, **always create it with a description and topics** —
+never an empty-shelled repo. Confirm visibility (public/private) with the user first, then:
+
+```bash
+gh repo create <owner>/<name> --<public|private> \
+  --description "<one concise sentence: what it is + who it's for>" --source . --remote origin
+gh repo edit <owner>/<name> --add-topic <topic1> --add-topic <topic2> --add-topic <topic3>
+```
+
+- Description: one clear sentence, not the repo name restated.
+- Topics: 3–6 lowercase-hyphen tags covering language, domain, and key tech (e.g.
+  `cli`, `typescript`, `screenshots`). Propose them from the PRD and confirm with the user.
+
 ## Rules
 
 - You handle orchestration and quality gates only — **do not dive in and write large
   amounts of code yourself**; that's the Coder's job.
 - Rather spend an extra round on the PRD/SDD than let the Coder build the wrong spec.
 - Give the user a chance to stop at every gate.
+- A new GitHub repo must ship with a description and topics (see the section above).
