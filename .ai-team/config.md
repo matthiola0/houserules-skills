@@ -27,6 +27,14 @@
   same spot. Never Haiku.
 - Reviewer/Editor: Codex CLI or a second tool
 
+## Concurrency (parallel dispatch)
+- **Max parallel Coders**: 3   ← how many ready, file-disjoint tasks run at once
+- Only parallelize tasks (here: independent skill/doc files) that touch **disjoint files**
+  and share no ordering. Tasks that edit the same file, or where one's output feeds another,
+  run **serially**. When in doubt, serialize.
+- Isolation: file-disjoint tasks share the working tree; tasks that must touch overlapping
+  areas (or each commit on their own) run in separate **git worktrees**, merged after.
+
 ## File locations
 - Style: .ai-team/style.md
 - Commit style: .ai-team/commit.md

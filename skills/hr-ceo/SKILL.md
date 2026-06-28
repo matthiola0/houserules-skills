@@ -125,6 +125,31 @@ Read the default from `config.md` and judge the current request:
    redo that task as **Opus** (never Haiku). The Coder checks off `plan.md` as each task
    completes.
 
+   **Parallel dispatch** — when several tasks have all deps done, run the independent ones
+   together instead of strictly one-by-one:
+   1. **Pick the ready set.** From `plan.md`, take tasks whose `deps:` are all checked off;
+      among those, highest priority first.
+   2. **Only parallelize what's safe.** Run tasks concurrently **only if they touch disjoint
+      files** and share no schema/migration or hidden ordering. Tasks that edit the same
+      files, or where one's output feeds another, run **serially**. When in doubt, serialize
+      — a wrong parallel run costs more than it saves.
+   3. **Cap the fan-out.** Run at most `Concurrency.Max parallel Coders` (`config.md`,
+      default **3**) subagents at once; queue the rest.
+   4. **Dispatch concurrently.** Spawn the batch as **Agent-tool subagents in a single
+      message** (each: act as `/hr-coder`, model Sonnet, scoped to its one task plus the
+      relevant `.ai-team/` paths). Subagents launched in one message run in parallel; spread
+      across separate messages they do not.
+   5. **Isolate writes.** File-disjoint tasks can share the working tree. If a batch must
+      touch overlapping areas — or each Coder commits on its own — give each subagent its own
+      **git worktree** (Agent tool `isolation: "worktree"`) and merge after; otherwise their
+      edits and commits race. Default: prefer file-disjoint and skip worktrees.
+   6. **You own the board and the merge.** Subagents report back to **you**; *you* check off
+      their rows in `plan.md` (don't let parallel Coders write that file at once) and
+      reconcile any worktree branches. A subagent that fails **does not block its siblings**
+      — collect it and apply the Recovery policy (§3f) to that task alone.
+   7. **Review the batch once.** After the ready set lands, run a **single** code-review pass
+      (§3f) over the combined result, not one review per subagent.
+
 **f. Code review (loop, with a circuit breaker)**
    After a batch of tasks, call `/hr-reviewer` in code-review mode. If `CHANGES_REQUESTED`,
    hand the report back to `/hr-coder` to fix, then re-review. **Do not loop forever** —

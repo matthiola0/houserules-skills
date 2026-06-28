@@ -23,6 +23,14 @@
 - Reviewer: Codex CLI (`codex review` / `codex exec`)
 - Tester: Claude + MCP
 
+## Concurrency (parallel dispatch)
+- **Max parallel Coders**: 3   ← how many ready, file-disjoint tasks run at once
+- Only parallelize tasks that touch **disjoint files** and share no schema/migration or
+  hidden ordering. Tasks that edit the same files, or where one's output feeds another,
+  run **serially**. When in doubt, serialize.
+- Isolation: file-disjoint tasks share the working tree; tasks that must touch overlapping
+  areas (or each commit on their own) run in separate **git worktrees**, merged after.
+
 ## File locations
 - Spec: .ai-team/prd.md
 - Design: .ai-team/sdd.md (non-code: outline.md)
