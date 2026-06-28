@@ -43,7 +43,7 @@ Replace `.ai-team/ceo-brain.md`. The default is Musk; to use someone else see
 
 ## Cross-project reuse
 
-1. One-time: `npx skills add <your-account>/houserules-skills` (global install).
+1. One-time: `npx skills add matthiola0/houserules-skills` (global install).
 2. Each new project: `/hr-ceo` → first run walks init to generate that project's `.ai-team/`.
 3. By default `.ai-team/` is git-ignored (local-only), so each project / machine regenerates
    it via init. If instead you want to **share** the same rules across machines or a team,

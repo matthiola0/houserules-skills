@@ -52,7 +52,7 @@ Roles talk to each other through plain files in a `.ai-team/` folder — nothing
 ## Install
 
 ```bash
-npx skills add OWNER/REPO        # replace OWNER/REPO with the published GitHub slug
+npx skills add matthiola0/houserules-skills
 ```
 
 You need:
