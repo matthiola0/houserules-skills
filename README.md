@@ -2,53 +2,50 @@
 
 > Set your rules once, stop repeating them. A reusable AI agent team for Claude Code.
 
-`houserules-skills` packages a "one-person company / AI agent team" as installable
-Claude Code Skills. The goal is simple: **stop re-explaining your code style, commit
-style, and workflow to the AI on every project.** Set your house rules once, have every
-project apply them automatically, and keep quality stable.
+Tired of re-explaining your code style, commit format, and workflow to the AI on every
+new project? `houserules-skills` packages a small **AI agent team** as installable Claude
+Code skills. You set your "house rules" once; every project applies them automatically and
+the quality stays consistent.
 
-Inspired by George Xing's *How I build with AI as a 1-person company* (a brainstorm →
-plan → execute → review workflow with dual-model review), plus an explicit **CEO
-orchestrator** role.
+Inspired by George Xing's *How I build with AI as a 1-person company* (a brainstorm → plan
+→ build → review loop with **dual-model review**), plus an explicit **CEO** that
+orchestrates everything.
 
 ---
 
 ## What it is
 
-A team of four roles. You talk only to the **CEO**; it dispatches the rest:
+A team of four roles. **You only ever talk to the CEO** — it dispatches the rest:
 
-| Role | Powered by | Responsibility |
-|------|-----------|----------------|
-| **CEO** (`/hr-ceo`) | Claude (swappable brain, defaults to a Musk first-principles framework) | Brainstorms with you, produces the PRD/SDD/Plan, dispatches work, reports back. The only role you talk to. |
-| **Coder** (`/hr-coder`) | Claude | Implements the SDD/Plan and commits per your style. |
-| **Reviewer** (`/hr-reviewer`) | **Codex (a different model)** | Design review + code review, structured reports, loops until it passes. |
-| **Tester** (`/hr-tester`) | Claude + MCP | Runs real user-scenario tests / fact-checks. |
+| Role | Powered by | What it does |
+|------|-----------|--------------|
+| **CEO** (`/hr-ceo`) | Claude | Brainstorms with you, writes the PRD + design, plans the work, dispatches the team, reports back. |
+| **Coder** (`/hr-coder`) | Claude | Implements the plan and commits, following your style. |
+| **Reviewer** (`/hr-reviewer`) | **Codex (a different model)** | Reviews the design and the code. A *different* model catches what the author misses. |
+| **Tester** (`/hr-tester`) | Claude + tools | Runs the real product against your scenarios. |
 
-**Dual-model review:** Claude writes, Codex reviews. Different models have different
-blind spots, so review is stricter.
-
-For non-code tasks (writing / research), the CEO automatically swaps the roles to
-**Drafter / Editor / Fact-checker** — same workflow, different personas.
+For writing/research tasks the same three roles switch to **Drafter / Editor /
+Fact-checker** automatically.
 
 ---
 
-## Workflow
+## How it works
 
 ```
 You ▶ CEO ─brainstorm→ prd.md
-         ─design→     sdd.md ──(Reviewer design review)──┐ must pass to continue
-         ─break down→ plan.md                            │
-                       ▼                                  │
-                  Coder ─write + commit→ code             │
-                       ▼                                  │
-                  Reviewer ─code review→ reviews/  ─(loop until fixed)
-                       ▼
-                  Tester ─scenario tests→ tests/
-                       ▼
-                  CEO reports back to you
+         ─design→     sdd.md ──(Reviewer checks the design)──┐ must pass first
+         ─plan→       plan.md                                │
+                        ▼                                     │
+                   Coder ─writes + commits→ code              │
+                        ▼                                     │
+                   Reviewer ─reviews the code→ (fix loop until it passes)
+                        ▼
+                   Tester ─runs your scenarios→ report
+                        ▼
+                   CEO sums up for you
 ```
 
-Roles pass messages through files under `.ai-team/` (traceable, tool-agnostic).
+Roles talk to each other through plain files in a `.ai-team/` folder — nothing hidden.
 
 ---
 
@@ -58,81 +55,137 @@ Roles pass messages through files under `.ai-team/` (traceable, tool-agnostic).
 npx skills add OWNER/REPO        # replace OWNER/REPO with the published GitHub slug
 ```
 
-Requirements:
+You need:
 - **Claude Code** (CEO / Coder / Tester)
-- **Codex CLI** >= 0.124 (Reviewer) — `codex` runnable in your terminal
-- (optional) **gemini-cli** (research / fact-check tasks)
-- (optional) Playwright-MCP / XcodeBuildMCP (Tester running web / iOS tests)
+- **Codex CLI** >= 0.124 for the Reviewer — `codex` must run in your terminal
+  (`npm i -g @openai/codex`, then `codex login`)
+- *(optional)* `gemini-cli` for research; Playwright-MCP for browser tests
 
-The installer (vercel-labs/skills) scans the `skills/` catalog layout and installs each
-role as its own skill. The skills are named `hr-ceo` / `hr-coder` / `hr-reviewer` / `hr-tester` — if any
-collide with skills you already have, rename them (see
-[docs/customization.md](docs/customization.md#tweak-role-behavior--rename-skills)).
+The four skills install as `hr-ceo` / `hr-coder` / `hr-reviewer` / `hr-tester`. If a name
+collides with a skill you already have, see [Rename the skills](#rename-the-skills).
 
 ---
 
 ## Quick start
 
-1. Open Claude Code in your project directory.
-2. Type `/hr-ceo` and describe what you want to build.
-3. On first run it walks an **init Q&A** and generates your settings under `.ai-team/`
-   (style, commit, CEO brain).
-4. The CEO then runs the whole team through brainstorm → design → build → review → test.
+1. Open Claude Code in your project folder.
+2. Type **`/hr-ceo`** and say what you want to build.
+3. The first time, it asks just two things — your task type, and **"use recommended rules
+   or customize?"**. Pick recommended and it's ready instantly.
+4. The CEO then walks the team through brainstorm → design → build → review → test, pausing
+   at each gate so you stay in control.
 
 ---
 
-## Default mode
+## What you get by default
 
-What you get out of the box, with zero customization:
+- **All four roles on.** Claude writes; **Codex reviews** (stricter, because it's a
+  different model).
+- **CEO thinks in Elon Musk first-principles** (delete needless requirements, demand
+  evidence). Swappable.
+- **Design must pass review before any code is written.**
+- **Commits**: Conventional Commits (`feat:` / `fix:` …), imperative, **no "Co-Authored-By"
+  or AI attribution**, no emojis.
+- **Code style auto-detects your stack** (Prettier/Black/gofmt…), comments and docs default
+  to English.
+- **`.ai-team/` is git-ignored** (local to each project) unless you choose to share it.
 
-- **Roles**: CEO + Coder + Reviewer + Tester, all on. You talk only to the CEO.
-- **Models**: Claude writes (CEO, Coder, Tester); **Codex CLI reviews** — a different model,
-  so review is stricter (dual-model review).
-- **CEO brain**: Elon Musk first-principles framework (`ceo-brain.md`), swappable.
-- **Flow (code)**: brainstorm → PRD → SDD → **design-review gate (must pass + you confirm
-  before any code)** → plan → code → code-review loop until `PASS` → scenario tests → report.
-- **Brainstorming**: the CEO asks you multiple-choice questions instead of open prompts.
-- **Commit style**: Conventional Commits prefix on (`feat:`/`fix:`/...), imperative subject,
-  **no `Co-Authored-By` / AI attribution**, no emojis.
-- **Code, comment & doc style**: "new code reads like existing code" is the top rule;
-  comment style and documentation/prose style are recorded too — all asked during init.
-- **First run (init)**: with no `.ai-team/`, the CEO asks just two things — task type, and
-  **"recommended defaults or customize?"**. Recommended needs zero style questions (style
-  auto-detects your stack); customize asks follow-ups. It writes
-  `config/style/commit/ceo-brain.md` into the project's `.ai-team/` and adds `.ai-team/`
-  to the project's root `.gitignore` (local-only by default).
-- **Non-code tasks**: roles auto-swap to Drafter / Editor / Fact-checker; the SDD becomes
-  an `outline.md`. Same flow.
-- **Messaging**: all roles communicate through files under `.ai-team/`; `plan.md`
-  checkboxes are the progress board.
+---
 
-In one line: **Claude writes, Codex reviews, a Musk-style brain orchestrates; design must
-pass before any code; commits are clean with no AI attribution; set it once and reuse
-across projects.**
+## Customize it — the cookbook
 
-## Customization (two layers)
+Everything is plain Markdown in your project's **`.ai-team/`** folder. To change a rule,
+open the file and edit the line. The CEO re-reads these on every run, so **you set it once
+and never repeat yourself.**
 
-The skill body ships fixed defaults; each project gets its own settings under `.ai-team/`
-that override them. By default `.ai-team/` is git-ignored (local to each project); to share
-the same rules across machines or a team, un-ignore and commit it — see
-[docs/customization.md](docs/customization.md).
+| I want to change… | Open this file | Edit this |
+|-------------------|----------------|-----------|
+| Code style (language, formatter, naming, tests) | `.ai-team/style.md` | the `Language / framework`, `Naming`, `Tests` sections |
+| Comment style | `.ai-team/style.md` | the `Comments (in code)` section |
+| **Comment language** | `.ai-team/style.md` | the `Comment language:` line |
+| **Documentation language** | `.ai-team/style.md` | the `Prose language:` line |
+| Commit message style | `.ai-team/commit.md` | the `Format` section / the `Toggle` |
+| The CEO's way of thinking | `.ai-team/ceo-brain.md` | replace the whole file |
+| Which roles run / the flow | `.ai-team/config.md` | the `Enabled roles` section |
 
-| File | Purpose |
-|------|---------|
-| `.ai-team/config.md` | Master switch: which roles are on, models, task type |
-| `.ai-team/style.md` | Code, comment & documentation style |
-| `.ai-team/commit.md` | Commit message style |
-| `.ai-team/ceo-brain.md` | CEO's thinking framework (swappable) |
+Concrete recipes:
 
-See complete filled-in examples in [`examples/`](examples/) (a TypeScript/React code
-project, and this repo's own `.ai-team/` for a writing project).
+### Change the code style
+Open `.ai-team/style.md`. Example — switch the project to Python with Black:
+```
+## Language / framework
+- Primary language: Python 3.12
+- Formatter: Black (its output is the source of truth)
+- Linter: Ruff
+```
+Next time the Coder writes code and the Reviewer checks it, both follow this.
 
-## Swapping the CEO brain (nuwa)
+### Change the commit style
+Open `.ai-team/commit.md`.
+- **Turn Conventional Commits off** (use plain `Add retry to upload client` instead of
+  `feat: add retry…`): find the `## Toggle` section and set the prefix to **off**.
+- The "never add AI attribution / no emojis" rules live under `## Hard rules` — keep or
+  edit them there.
 
-By default the CEO uses a Musk first-principles framework. To use someone else's, distill
-their cognitive framework with [nuwa-skill](https://github.com/alchaincyf/nuwa-skill)
-and paste it into `.ai-team/ceo-brain.md`. See
+### Change the comment style or language
+Open `.ai-team/style.md`, the `## Comments (in code)` section. Example — write comments in
+Traditional Chinese and require doc-comments:
+```
+## Comments (in code)
+- Comment language: Traditional Chinese (繁體中文).
+- Doc-comments on every exported function (JSDoc).
+- TODO/FIXME format: // TODO(yourname): ...
+```
+
+### Change the documentation language
+Open `.ai-team/style.md`, the `## Documentation & prose` section. Example:
+```
+## Documentation & prose (README, docs, commit bodies)
+- Prose language: Traditional Chinese (繁體中文); keep code, commands, and filenames in English.
+```
+
+### Swap the CEO's brain (e.g. Steve Jobs instead of Musk)
+The CEO's thinking lives in `.ai-team/ceo-brain.md`. Either edit it directly, or generate a
+new one with [nuwa-skill](https://github.com/alchaincyf/nuwa-skill):
+```bash
+npx skills add alchaincyf/nuwa-skill
+# then in Claude Code:  distill Steve Jobs
+```
+Paste the result into `.ai-team/ceo-brain.md`. Full guide:
 [docs/nuwa-integration.md](docs/nuwa-integration.md).
+
+### Turn a role off (change the flow)
+Open `.ai-team/config.md`, the `## Enabled roles` section. Example — a quick script where
+you don't want the test stage:
+```
+## Enabled roles
+- coder: on
+- reviewer: on
+- tester: off
+```
+Turn `reviewer: off` if you want to skip the dual-model review entirely (not recommended —
+it's the best part).
+
+### Rename the skills
+If `/hr-ceo` etc. clash with other skills, rename the folder and the `name:` line in each
+`skills/<role>/SKILL.md` (e.g. to your own prefix), and update the dispatch references in
+`skills/hr-ceo/SKILL.md`. See [docs/customization.md](docs/customization.md).
+
+---
+
+## Why it's reusable (two layers)
+
+- **The skills** (installed once, globally) hold the *workflow and the roles* — stable, you
+  don't touch them.
+- **`.ai-team/`** (per project) holds *your rules* — style, commits, CEO brain. This is what
+  you customize.
+
+Same team everywhere; different rules per project. See filled-in examples in
+[`examples/`](examples/) (a TypeScript/React project) and this repo's own
+[`.ai-team/`](.ai-team/) (a writing project).
+
+To **share** one set of rules across machines or a team, just commit `.ai-team/` (remove its
+line from `.gitignore`).
 
 ---
 
