@@ -23,9 +23,11 @@ A team of four roles. **You only ever talk to the CEO** — it dispatches the re
 | **Coder** (`/hr-coder`) | Claude | Implements the plan and commits, following your style. |
 | **Reviewer** (`/hr-reviewer`) | **Codex (a different model)** | Reviews the design and the code. A *different* model catches what the author misses. |
 | **Tester** (`/hr-tester`) | Claude + tools | Runs the real product against your scenarios. |
+| **Explainer** (`/hr-explainer`) | Claude (Paul Graham brain) | *Standalone.* Explains any project in plain language — an intro doc, or Q&A about a repo. |
 
-For writing/research tasks the same three roles switch to **Drafter / Editor /
-Fact-checker** automatically.
+For writing/research tasks the first three roles switch to **Drafter / Editor /
+Fact-checker** automatically. The **Explainer** is standalone — call `/hr-explainer`
+yourself whenever you want a plain-language intro or answers about a project.
 
 ---
 
@@ -107,6 +109,8 @@ and never repeat yourself.**
 | Commit message style | `.ai-team/commit.md` | the `Format` section / the `Toggle` |
 | The CEO's way of thinking | `.ai-team/ceo-brain.md` | replace the whole file |
 | Which roles run / the flow | `.ai-team/config.md` | the `Enabled roles` section |
+| The Explainer's output language | `.ai-team/config.md` | the `Explainer` section's `Output language` line |
+| How the Explainer writes | `.ai-team/explainer-brain.md` | replace the whole file |
 
 Concrete recipes:
 
@@ -153,6 +157,18 @@ npx skills add alchaincyf/nuwa-skill
 ```
 Paste the result into `.ai-team/ceo-brain.md`. Full guide:
 [docs/nuwa-integration.md](docs/nuwa-integration.md).
+
+### Explain a project in plain language
+Call `/hr-explainer` in any repo. It reads the README / specs / code and either writes a
+plain intro (what it is, the problem it solves, who it's for, how to start) or answers your
+questions — no jargon, no marketing words, no weird metaphors. Set its language in
+`.ai-team/config.md`:
+```
+## Explainer (the /hr-explainer role, standalone)
+- Output language: Traditional Chinese (繁體中文)
+```
+If you don't set it, it replies in whatever language you ask in. To change *how* it writes,
+edit `.ai-team/explainer-brain.md` (defaults to a Paul Graham clear-writing style).
 
 ### Turn a role off (change the flow)
 Open `.ai-team/config.md`, the `## Enabled roles` section. Example — a quick script where

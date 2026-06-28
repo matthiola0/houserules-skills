@@ -18,6 +18,9 @@
   design review)
 - tester: off (no runnable product here; acceptance is a manual dry-run of the /hr-ceo flow)
 
+## Explainer (the /hr-explainer role, standalone)
+- Output language: match the user
+
 ## Model split
 - CEO: Claude (reads ceo-brain.md)
 - Coder/Drafter: Claude

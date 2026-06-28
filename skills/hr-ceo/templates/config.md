@@ -13,6 +13,9 @@
 - reviewer: on
 - tester: on
 
+## Explainer (the /hr-explainer role, standalone)
+- Output language: match the user   ← or pin one, e.g. "Traditional Chinese (繁體中文)"
+
 ## Model split (dual-model review)
 - CEO: Claude (reads ceo-brain.md)
 - Coder: Claude
