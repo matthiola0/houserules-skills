@@ -23,7 +23,8 @@
 
 ## Model split
 - CEO: Claude (reads ceo-brain.md)
-- Coder/Drafter: Claude
+- Coder/Drafter: Claude Sonnet by default; escalate to Opus if Sonnet fails twice on the
+  same spot. Never Haiku.
 - Reviewer/Editor: Codex CLI or a second tool
 
 ## File locations

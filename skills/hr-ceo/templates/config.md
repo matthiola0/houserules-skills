@@ -18,7 +18,8 @@
 
 ## Model split (dual-model review)
 - CEO: Claude (reads ceo-brain.md)
-- Coder: Claude
+- Coder: Claude Sonnet by default; escalate that task to Opus if Sonnet fails twice on the
+  same spot. Never Haiku.
 - Reviewer: Codex CLI (`codex review` / `codex exec`)
 - Tester: Claude + MCP
 

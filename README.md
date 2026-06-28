@@ -83,6 +83,8 @@ collides with a skill you already have, see [Rename the skills](#rename-the-skil
 
 - **All four roles on.** Claude writes; **Codex reviews** (stricter, because it's a
   different model).
+- **Cost-aware model tiers.** The Coder runs as **Sonnet** by default and only escalates a
+  task to **Opus** if Sonnet fails twice on the same spot. (No Haiku.)
 - **CEO thinks in Elon Musk first-principles** (delete needless requirements, demand
   evidence). Swappable.
 - **Design must pass review before any code is written.**

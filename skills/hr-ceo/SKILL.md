@@ -100,7 +100,9 @@ Read the default from `config.md` and judge the current request:
 
 **e. Execute**
    For each task, call `/hr-coder`, passing `plan.md` / `sdd.md` / `style.md` / `commit.md`.
-   The Coder checks off `plan.md` as each task completes.
+   Dispatch the Coder as **Sonnet** by default; if Sonnet fails twice on the same task,
+   redo that task as **Opus** (never Haiku). The Coder checks off `plan.md` as each task
+   completes.
 
 **f. Code review (loop)**
    After a batch of tasks, call `/hr-reviewer` in code-review mode. If `CHANGES_REQUESTED`,
