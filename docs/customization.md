@@ -5,10 +5,12 @@ projects yet customizable per project.
 
 ```
 Skill body (defaults, don't edit after install)   Project layer (.ai-team/, per project, git-ignored by default, overrides)
-skills/hr-ceo|hr-coder|hr-reviewer|hr-tester/SKILL.md          .ai-team/config.md      ← which roles, models
+skills/hr-ceo|hr-coder|hr-reviewer|hr-tester/SKILL.md          .ai-team/config.md      ← roles, models, recovery policy
 skills/hr-ceo/templates/ (used by init)               .ai-team/style.md       ← code/writing style
                                                    .ai-team/commit.md      ← commit style
                                                    .ai-team/ceo-brain.md   ← CEO thinking
+                                                   .ai-team/guardrails.md  ← forbidden ops + confirm-before
+                                                   .ai-team/memory.md      ← long-term conventions + decisions
 ```
 
 On init the CEO adds `.ai-team/` to your project's **root** `.gitignore`, so the whole
@@ -48,5 +50,6 @@ Replace `.ai-team/ceo-brain.md`. The default is Musk; to use someone else see
 3. By default `.ai-team/` is git-ignored (local-only), so each project / machine regenerates
    it via init. If instead you want to **share** the same rules across machines or a team,
    remove the `.ai-team/` line from `.gitignore` and commit the config files
-   (`config.md`, `style.md`, `commit.md`, `ceo-brain.md`); you can keep `reviews/` and
-   `tests/` ignored.
+   (`config.md`, `style.md`, `commit.md`, `ceo-brain.md`, `guardrails.md`); you can keep
+   `reviews/` and `tests/` ignored. `memory.md` is usually worth committing too — it's the
+   shared institutional memory of the repo.

@@ -20,7 +20,10 @@ and hold the quality gates.
 1. Read `.ai-team/ceo-brain.md` — your thinking framework (defaults to first-principles).
    Interact with the user using its decision style.
 2. Read `.ai-team/config.md`, `.ai-team/style.md`, `.ai-team/commit.md` (if present).
-3. **If `.ai-team/config.md` does not exist → run §1 init first**, otherwise go to §2.
+3. Read `.ai-team/memory.md` (long-term memory — conventions + past decisions for this repo)
+   and `.ai-team/guardrails.md` (forbidden ops + confirm-before list). Apply memory so the
+   team doesn't relearn what's already known; enforce guardrails at every gate.
+4. **If `.ai-team/config.md` does not exist → run §1 init first**, otherwise go to §2.
 
 **How you dispatch a role** — concretely, one of:
 - **(a) Subagent (preferred for isolation)**: use the **Agent tool** to spawn a subagent
@@ -59,11 +62,14 @@ behind:
 - Commit style — confirm or change the Conventional Commits toggle → `commit.md`
 - Which roles to enable (Reviewer / Tester on by default) → `config.md`
 - Which CEO brain (defaults to Musk first-principles) → `ceo-brain.md`
+- Guardrails — confirm or extend the forbidden / confirm-before lists → `guardrails.md`
 
 Then (both paths):
-1. Create the artifact directories `.ai-team/reviews/` and `.ai-team/tests/` (the Reviewer
+1. Copy **all** templates, including `memory.md` (starts empty — the team fills it over time)
+   and `guardrails.md` (safety defaults). Leave no `<...>` placeholder behind in `config.md`.
+2. Create the artifact directories `.ai-team/reviews/` and `.ai-team/tests/` (the Reviewer
    and Tester write there).
-2. Add `.ai-team/` to the project's **root** `.gitignore` (create the file if missing; skip
+3. Add `.ai-team/` to the project's **root** `.gitignore` (create the file if missing; skip
    if the entry is already there) so the team's working directory stays local-only.
 
 When done, tell the user "the team is ready."
@@ -84,6 +90,10 @@ Read the default from `config.md` and judge the current request:
    round of multiple-choice questions first (scope, users, must-haves vs cut, success
    criteria). The brainstorm IS the CEO's job — skipping it defeats the purpose. Only
    proceed to the PRD once the user has answered.
+   **Each user scenario must carry an explicit, measurable acceptance criterion** — a
+   pass/fail condition the Tester can score without judgement calls (e.g. "upload of a 10 MB
+   file completes in < 5 s and shows a success toast", not "upload works"). These criteria
+   are the contract the Tester scores against in §3g.
 
 **b. Design → SDD**
    Turn the PRD into `.ai-team/sdd.md`: architecture, data model, interfaces/APIs, tech
@@ -95,8 +105,19 @@ Read the default from `config.md` and judge the current request:
    user confirms.**
 
 **d. Break down → Plan**
-   Produce `.ai-team/plan.md`: an ordered, independently-completable, checklist of tasks,
-   each mapped to part of the SDD.
+   Produce `.ai-team/plan.md` as a **dependency- and priority-aware** task list, not a flat
+   checklist. Each task is one row:
+
+   ```markdown
+   - [ ] T1 (P1, deps: —)   <task> — SDD §<ref>
+   - [ ] T2 (P1, deps: T1)  <task> — SDD §<ref>
+   - [ ] T3 (P2, deps: T1)  <task> — SDD §<ref>
+   ```
+
+   `P1/P2/P3` = priority (P1 = must-have / critical path). `deps:` lists task ids that must
+   finish first. Schedule by dependency order, highest priority first — **dispatch tasks
+   whose deps are all done**, and prefer running independent same-priority tasks together
+   rather than blindly top-to-bottom. The checkbox is the progress board.
 
 **e. Execute**
    For each task, call `/hr-coder`, passing `plan.md` / `sdd.md` / `style.md` / `commit.md`.
@@ -104,15 +125,28 @@ Read the default from `config.md` and judge the current request:
    redo that task as **Opus** (never Haiku). The Coder checks off `plan.md` as each task
    completes.
 
-**f. Code review (loop)**
+**f. Code review (loop, with a circuit breaker)**
    After a batch of tasks, call `/hr-reviewer` in code-review mode. If `CHANGES_REQUESTED`,
-   hand the report back to `/hr-coder` to fix, then re-review, until `PASS`.
+   hand the report back to `/hr-coder` to fix, then re-review. **Do not loop forever** —
+   apply the Recovery policy in `config.md`: at the max-round threshold (default 3 on the
+   same batch), stop and decide: implementation issue → escalate the Coder to Opus and retry
+   once; design issue → reopen the SDD (back to design review, §3c); still stuck → stop and
+   bring it to the human at the gate.
 
-**g. Test**
-   Call `/hr-tester` to run the user scenarios from the PRD; reports go to `.ai-team/tests/`.
+**g. Test (scored)**
+   Call `/hr-tester` to run the PRD scenarios against their acceptance criteria (§3a). The
+   Tester returns a **scorecard** (per-criterion pass/fail + overall pass rate) to
+   `.ai-team/tests/`. Failing scenarios come back to you — return them to the Coder or
+   adjust the PRD; never mark them passed yourself.
 
 **h. Report back**
-   In your own voice, report results, remaining risks, and recommended next steps.
+   In your own voice, report results (including the Tester's score), remaining risks, and
+   recommended next steps.
+
+**i. Update long-term memory**
+   Before closing out, append to `.ai-team/memory.md`: new conventions/gotchas the team hit,
+   any design decisions made (with why), and any guardrail overrides the human approved. This
+   is what stops the next task from relearning the same things.
 
 ## 4. Non-code flow
 
@@ -132,7 +166,8 @@ Same shape as §3, with these substitutions:
 
 All cross-role communication goes through `.ai-team/` files, never verbal memory:
 `prd.md`, `sdd.md` (or `outline.md`), `plan.md`, `reviews/NNN-*.md`, `tests/NNN-*.md`.
-The checkbox state in `plan.md` is the progress board.
+The checkbox state in `plan.md` is the progress board. Two files **persist across tasks**:
+`memory.md` (conventions + decisions) and `guardrails.md` (safety) — read both every run.
 
 ## Creating a GitHub repo for a new project
 
@@ -155,4 +190,7 @@ gh repo edit <owner>/<name> --add-topic <topic1> --add-topic <topic2> --add-topi
   amounts of code yourself**; that's the Coder's job.
 - Rather spend an extra round on the PRD/SDD than let the Coder build the wrong spec.
 - Give the user a chance to stop at every gate.
+- **Enforce `guardrails.md`**: never let a role run a forbidden action, and pause for human
+  confirmation before any confirm-before action. Record approved overrides in `memory.md`.
+- **Honor the Recovery policy** — don't let any review/fix loop run unbounded.
 - A new GitHub repo must ship with a description and topics (see the section above).

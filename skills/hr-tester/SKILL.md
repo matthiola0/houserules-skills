@@ -17,30 +17,37 @@ does what the PRD says.
 
 ## Flow
 
-1. Read `.ai-team/prd.md` and extract the verifiable **user scenarios / acceptance
-   criteria** (happy path + important edge cases).
+1. Read `.ai-team/prd.md` and extract the explicit **acceptance criteria** the CEO wrote for
+   each scenario (happy path + important edge cases). Each is a measurable pass/fail
+   condition — you score against it, you don't invent your own bar. Also read
+   `.ai-team/guardrails.md` before driving anything.
 2. Pick the right execution method:
    - **Web app** → any available browser automation tool (Playwright-MCP, or the `/browse`
      skill if installed): actually click, fill forms, screenshot.
    - **iOS** → XcodeBuildMCP running the simulator.
    - **CLI / library / backend** → actually run it, hit the API, run an end-to-end script.
-3. Walk each scenario and record: steps → expected → actual → pass/fail (on failure attach
-   evidence: error message, screenshot path).
-4. Write the report to `.ai-team/tests/NNN-test-report.md`.
+3. Walk each scenario and record: criterion → steps → expected → actual → pass/fail (on
+   failure attach evidence: error message, screenshot path).
+4. Write the **scorecard** to `.ai-team/tests/NNN-test-report.md`.
 
-## Report format
+## Report format (scorecard)
 
 ```markdown
 # Test NNN — <date filled by CEO>
 Environment: <how it was run>
 
-| # | scenario | steps | expected | actual | result |
-|---|----------|-------|----------|--------|--------|
-| 1 | ...      | ...   | ...      | ...    | PASS/FAIL |
+| # | scenario | acceptance criterion | steps | expected | actual | result |
+|---|----------|----------------------|-------|----------|--------|--------|
+| 1 | ...      | <measurable pass/fail> | ... | ...    | ...    | PASS/FAIL |
 
-## Summary
-Passed X / Y. Blocking issues: <list, sent back to CEO>
+## Score
+- Passed: X / Y criteria  →  **pass rate Z%**
+- Blocking failures (P1 scenarios): <count + list, sent back to the CEO>
+- Verdict: SHIP-READY  ←or→  NOT YET (blocking failures above)
 ```
+
+Score honestly against the criteria in the PRD — a scenario only passes if its acceptance
+criterion is actually met, not "looks roughly right."
 
 ## Rules
 

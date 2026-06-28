@@ -81,8 +81,12 @@ PASS  ←or→  CHANGES_REQUESTED (with a one-line summary of why)
 - **Find real issues**: bugs, drift from the SDD, security, performance, naming/style
   violations of `style.md`. Don't pad with trivia.
 - **Actionable**: every finding must be something the Coder can directly act on.
-- On `CHANGES_REQUESTED`, hand the report back to the CEO → Coder fixes → re-review, loop
-  until `PASS`.
+- On `CHANGES_REQUESTED`, hand the report back to the CEO → Coder fixes → re-review. The
+  loop is **bounded** by the Recovery policy in `config.md` (default 3 rounds on the same
+  batch); at the cap the CEO escalates or stops — don't expect to re-review indefinitely.
+- If the **same class of finding recurs** (here or across tasks), propose a one-line
+  convention for `.ai-team/memory.md` so it stops recurring — fix the pattern, not just the
+  instance.
 - Label severity honestly — don't inflate low to high to scare, don't downplay a real high.
 
 ---

@@ -31,5 +31,16 @@
 - Style: .ai-team/style.md
 - Commit style: .ai-team/commit.md
 - CEO brain: skills/hr-ceo/templates/ceo-brain.md (this repo maintains that default brain itself)
+- Long-term memory: .ai-team/memory.md
+- Guardrails: .ai-team/guardrails.md
 - Review reports: .ai-team/reviews/ (git-ignored)
 - Test reports: .ai-team/tests/ (git-ignored)
+
+## Recovery policy
+- Editor/review loop: max 3 CHANGES_REQUESTED rounds on the same draft, then the CEO
+  escalates to Opus / reopens the outline / stops for the human.
+
+## Gates (require human confirmation to proceed)
+- After the outline/design review.
+- When the review loop hits the Recovery-policy max rounds.
+- Before any action listed in `guardrails.md`.

@@ -51,6 +51,28 @@ Roles talk to each other through plain files in a `.ai-team/` folder — nothing
 
 ---
 
+## Design patterns it maps to
+
+This team isn't ad-hoc — it lines up with the agentic design patterns catalogued in Antonio
+Gulli's *Agentic Design Patterns* (the widely-shared ~400-page Google guide). The ones this
+project already implements:
+
+| Pattern | Where it lives here |
+|---------|---------------------|
+| **Multi-Agent Collaboration** | Four specialized roles instead of one do-everything agent. |
+| **Routing** | The CEO dispatches each task to the right role. |
+| **Planning** | The CEO decomposes work into `prd.md` → `sdd.md` → `plan.md` before any code. |
+| **Reflection** | The Reviewer critiques the design and the code — **via a different model (Codex)**, so blind spots differ. |
+| **Inter-Agent Communication** | Roles hand off through plain files in `.ai-team/` — auditable, nothing hidden. |
+| **Human-in-the-Loop** | You only talk to the CEO, which pauses at each gate for your call. |
+| **Goal Decomposition & Prioritization** | `plan.md` carries priorities + dependencies; the CEO schedules ready tasks, not blindly top-to-bottom. |
+| **Memory Management** | `memory.md` is long-term memory — conventions and decisions that persist across tasks so the team stops relearning. |
+| **Goal Setting & Evaluation** | Every PRD scenario has a measurable acceptance criterion; the Tester returns a scored scorecard. |
+| **Exception Handling & Recovery** | A Recovery policy bounds the review/fix loop — escalate, reopen the design, or stop, never loop forever. |
+| **Guardrails** | `style.md` / `commit.md` plus `guardrails.md` (forbidden ops + confirm-before-acting) constrain every role's output. |
+
+---
+
 ## Install
 
 ```bash
@@ -88,6 +110,13 @@ collides with a skill you already have, see [Rename the skills](#rename-the-skil
 - **CEO thinks in Elon Musk first-principles** (delete needless requirements, demand
   evidence). Swappable.
 - **Design must pass review before any code is written.**
+- **Acceptance criteria + scorecard.** Every PRD scenario gets a measurable pass/fail bar; the
+  Tester reports a scored scorecard, not a vibe check.
+- **Bounded recovery.** The review→fix loop can't spin forever — at the threshold the CEO
+  escalates the Coder to Opus, reopens the design, or stops for you.
+- **Safety guardrails + long-term memory.** `guardrails.md` blocks destructive actions
+  (force-push, prod writes, secret commits) and pauses for confirmation; `memory.md` remembers
+  this repo's conventions and decisions so the team doesn't relearn them every task.
 - **Commits**: Conventional Commits (`feat:` / `fix:` …), imperative, **no "Co-Authored-By"
   or AI attribution**, no emojis.
 - **Code style auto-detects your stack** (Prettier/Black/gofmt…), comments and docs default
@@ -111,6 +140,9 @@ and never repeat yourself.**
 | Commit message style | `.ai-team/commit.md` | the `Format` section / the `Toggle` |
 | The CEO's way of thinking | `.ai-team/ceo-brain.md` | replace the whole file |
 | Which roles run / the flow | `.ai-team/config.md` | the `Enabled roles` section |
+| Recovery thresholds (how many review rounds before escalating) | `.ai-team/config.md` | the `Recovery policy` section |
+| **Safety guardrails** (forbidden ops, confirm-before actions) | `.ai-team/guardrails.md` | the two lists |
+| **Long-term memory** (repo conventions, past decisions) | `.ai-team/memory.md` | append entries (the team also fills this) |
 | The Explainer's output language | `.ai-team/config.md` | the `Explainer` section's `Output language` line |
 | How the Explainer writes | `.ai-team/explainer-brain.md` | replace the whole file |
 
