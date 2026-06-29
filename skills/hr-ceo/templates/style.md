@@ -27,13 +27,13 @@
 - Validate external input at boundaries; never swallow errors silently.
 
 ## Comments (in code)
-- Comment language: English.
+- Comment language: English.   ← independent of the chat language; see config.md → Language
 - Explain why, not what; match the density of surrounding code.
 - Doc-comments on exported/public APIs (JSDoc / docstring / rustdoc as the stack dictates).
 - TODO/FIXME format: `// TODO(owner): ...`
 
 ## Documentation & prose (README, docs, commit bodies)
-- Prose language: English.
+- Prose language: English.   ← independent of the chat language; see config.md → Language
 - Concise, direct, second person; no marketing fluff.
 - Lead with the why; short sections; tables for structured info.
 - Code / paths / commands in `backticks`; copy-pasteable fenced blocks; sentence-case headings.

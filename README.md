@@ -135,6 +135,7 @@ and never repeat yourself.**
 |-------------------|----------------|-----------|
 | Code style (language, formatter, naming, tests) | `.ai-team/style.md` | the `Language / framework`, `Naming`, `Tests` sections |
 | Comment style | `.ai-team/style.md` | the `Comments (in code)` section |
+| **Conversation vs. document language** (they're separate) | `.ai-team/config.md` | the `Language` section's `Conversation language` / `Artifact language` lines |
 | **Comment language** | `.ai-team/style.md` | the `Comment language:` line |
 | **Documentation language** | `.ai-team/style.md` | the `Prose language:` line |
 | Commit message style | `.ai-team/commit.md` | the `Format` section / the `Toggle` |
@@ -181,6 +182,18 @@ Open `.ai-team/style.md`, the `## Documentation & prose` section. Example:
 ## Documentation & prose (README, docs, commit bodies)
 - Prose language: Traditional Chinese (繁體中文); keep code, commands, and filenames in English.
 ```
+
+### Set the conversation vs. document language (they're separate)
+The language the team **chats** in is not automatically the language it **writes documents**
+in — chatting in Chinese doesn't mean your specs should be Chinese. These are two independent
+choices in `.ai-team/config.md`, the `## Language` section:
+```
+## Language (two separate choices — confirm each, never assume they match)
+- Conversation language: 繁體中文        ← how the CEO talks to you
+- Artifact language: English             ← prd.md / sdd.md / plan.md / reviews / tests
+```
+The CEO confirms both at init and never mirrors one onto the other silently. (Code comments
+and README/commit prose are tuned separately above.)
 
 ### Swap the CEO's brain (e.g. Steve Jobs instead of Musk)
 The CEO's thinking lives in `.ai-team/ceo-brain.md`. Either edit it directly, or generate a

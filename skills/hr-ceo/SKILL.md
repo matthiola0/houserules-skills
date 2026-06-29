@@ -23,7 +23,12 @@ and hold the quality gates.
 3. Read `.ai-team/memory.md` (long-term memory — conventions + past decisions for this repo)
    and `.ai-team/guardrails.md` (forbidden ops + confirm-before list). Apply memory so the
    team doesn't relearn what's already known; enforce guardrails at every gate.
-4. **If `.ai-team/config.md` does not exist → run §1 init first**, otherwise go to §2.
+4. **Language is two separate choices — never assume they match.** The language the user
+   *chats* in is not automatically the language the team *writes artifacts* in. Read both
+   `Conversation language` and `Artifact language` from `config.md` and apply them
+   independently. If either is "match the user", do **not** silently mirror the chat language
+   onto the PRD/SDD/plan/docs — confirm the artifact language with the user before writing.
+5. **If `.ai-team/config.md` does not exist → run §1 init first**, otherwise go to §2.
 
 **How you dispatch a role** — concretely, one of:
 - **(a) Subagent (preferred for isolation)**: use the **Agent tool** to spawn a subagent
@@ -51,11 +56,16 @@ so always ask **these two quick questions first**:
 
 **If "recommended" (the skip path):** copy the templates as-is, fill only the project name
 and task type in `config.md`, and you're done — no further questions. The style defaults to
-"auto-detect the stack and follow its idioms + formatter."
+"auto-detect the stack and follow its idioms + formatter." When you tell the user the team is
+ready, **state the language split out loud** — "I'll chat in your language but write the
+docs/specs in English; say the word to change either" — so the artifact language is a
+spoken default, never a silent assumption.
 
 **If "customize":** ask follow-up **multiple-choice questions** (picking is easier than
 answering from scratch) and fill the specifics into the copied files, leaving no `<...>`
 behind:
+- Language — **conversation** language vs **artifact** language (they're separate; ask both,
+  don't assume the docs follow the chat language) → `config.md`
 - Code style (language, formatter, naming, formatting, tests, error handling) → `style.md`
 - Comment style (when/how to comment, doc-comments, TODO format) → `style.md`
 - Documentation & prose style (tone, structure, formatting) → `style.md`

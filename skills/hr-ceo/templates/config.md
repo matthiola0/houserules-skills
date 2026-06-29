@@ -8,6 +8,16 @@
 - Name: <project name>
 - Default task type: code | writing | research   ← pick one as the default
 
+## Language (two separate choices — confirm each, never assume they match)
+- Conversation language: match the user   ← how the team talks to you in chat
+- Artifact language: English              ← the docs the team WRITES: prd.md / sdd.md /
+  plan.md / reviews / tests
+> The language you *chat* in is NOT automatically the language your *documents* are written
+> in. These are independent — a Chinese conversation can still produce English specs (or vice
+> versa). Don't mirror the chat language onto artifacts silently; if either line says "match
+> the user", confirm the artifact language before writing.
+> (Code comments and README/commit prose are set separately in `style.md`.)
+
 ## Enabled roles
 - coder: on
 - reviewer: on

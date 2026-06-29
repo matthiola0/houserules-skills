@@ -6,6 +6,12 @@
 - Name: acme-dashboard
 - Default task type: code
 
+## Language (two separate choices — confirm each, never assume they match)
+- Conversation language: match the user
+- Artifact language: English   ← prd.md / sdd.md / plan.md / reviews / tests
+> Chatting in one language does not mean the docs are written in it. Code comments and
+> README/commit prose are set separately in `style.md`.
+
 ## Enabled roles
 - coder: on
 - reviewer: on

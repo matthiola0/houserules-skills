@@ -12,6 +12,13 @@
 - Default task type: writing (this repo's content is Markdown skill files and docs, not
   compiled code)
 
+## Language (two separate choices — confirm each, never assume they match)
+- Conversation language: match the user
+- Artifact language: English   ← skill files, docs, and specs are written in English even
+  when the conversation is in another language
+> The chat language is not automatically the artifact language; confirm each separately.
+> Code comments and README/commit prose are set separately in `style.md`.
+
 ## Enabled roles
 - coder: on (here "code" = skill / doc writing, i.e. the Drafter mode)
 - reviewer: on (Editor mode for wording and consistency; technical snippets can use Codex
